@@ -22,19 +22,8 @@ def get_contacts(filename):
             emails.append(a_contact.split()[1])
     return names, emails
 
-def read_template(filename):
-    """
-    Returns a Template object comprising the contents of the
-    file specified by filename.
-    """
-
-    with open(filename, 'r', encoding='utf-8') as template_file:
-        template_file_content = template_file.read()
-    return Template(template_file_content)
-
-def main_email():
+def main_email(insertdata,status,timestamp):
     names, emails = get_contacts('mycontacts.txt') # read contacts
-    message_template = read_template('message.txt')
 
     # set up the SMTP server
     s = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -46,7 +35,16 @@ def main_email():
         msg = MIMEMultipart()       # create a message
 
         # add in the actual person name to the message template
-        message = message_template.substitute(PERSON_NAME=name.title())
+        #message = message_template.substitute(PERSON_NAME=name.title())
+        message = """\
+        Dear %s,
+
+        Kepada Human Resource Development,
+        Kami memberitahukan bahwa karyawan dengan nama %s ,
+        Hari ini datang %s pada tanggal dan pukul %s .
+
+        Terima kasih.
+        """ % (name.title(),insertdata,status,timestamp)
 
         # Prints out the message body for our sake
         print(message)
@@ -54,7 +52,7 @@ def main_email():
         # setup the parameters of the message
         msg['From']=MY_ADDRESS
         msg['To']=email
-        msg['Subject']="This is TEST"
+        msg['Subject']="Laporan Keterlambatan Karyawan"
 
         # add in the message body
         msg.attach(MIMEText(message, 'plain'))

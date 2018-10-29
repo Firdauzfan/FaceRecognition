@@ -93,7 +93,7 @@ def datang(insertdata,kamera,status,frame):
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,status,timestamp)
                     id_tele_terlambat='205017793'
                     send_message(text_terlambat, id_tele_terlambat, poto)
-                    main_email()
+                    main_email(insertdata,status,timestamp)
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
