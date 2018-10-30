@@ -1,9 +1,9 @@
 '''
 To execute simply run:
-main.py
+main_facerec.py
 
 To input new user:
-main.py --mode "input"
+main_facerec.py --mode "input"
 
 '''
 
@@ -11,11 +11,21 @@ import cv2
 from align_custom import AlignCustom
 from face_feature import FaceFeature
 from mtcnn_detect import MTCNNDetect
+from database import *
 from tf_graph import FaceRecGraph
 import argparse
 import sys
 import json
 import numpy as np
+import imutils
+import datetime
+from notify_run import Notify
+
+
+# ------------ setting time in and time go home ------- #
+
+masuk = 08.50
+keluar = 17.50
 
 def main(args):
     mode = args.mode
@@ -36,13 +46,17 @@ Images from Video Capture -> detect faces' regions -> crop those faces and align
 
 '''
 def camera_recog():
+    notify = Notify()
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
     #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/501")
+
     while True:
         _,frame = vs.read();
-        #u can certainly add a roi here but for the sake of a demo i'll just leave t as simple as this
+        #frame  = imutils.resize(frame, width = 640)
+        #u can certainly add a roi here but for the sake of a demo i'll just leave it as simple as this
         rects, landmarks = face_detect.detect_face(frame,30);#min face size is set to 80x80
         aligns = []
         positions = []
@@ -57,8 +71,33 @@ def camera_recog():
             features_arr = extract_feature.get_features(aligns)
             recog_data = findPeople(features_arr,positions);
             for (i,rect) in enumerate(rects):
+                ts = time.time()
+                timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+
                 cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
-                cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+
+                if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
+                    kamera="kamera 1"
+                    #check=checking(recog_data[i][0],kamera)
+                    #print(timestamp)
+                    if timestamp>'06:00:00' and timestamp<'08:30:00':
+                        status="Tepat Waktu"
+                        insertdata= data(recog_data[i][0],kamera)
+                        insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                    elif timestamp>'08:30:00' and timestamp<'17:30:00':
+                        status="Terlambat"
+                        insertdata= data(recog_data[i][0],kamera)
+                        insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                    elif timestamp>'17:30:00' and timestamp<'23:59:00':
+                        insertdata= data(recog_data[i][0],kamera)
+                        insertbalik= balik(recog_data[i][0],kamera,frame)
+                    else:
+                        insertdata= data(recog_data[i][0],kamera)
+
+                    #if recog_data[i][0]=='Firdauz_Fanani':
+                        #notify.send('%s Memasuki Ruangan Terlarang' %recog_data[i][0])
 
         cv2.imshow("Frame",frame)
         key = cv2.waitKey(1) & 0xFF

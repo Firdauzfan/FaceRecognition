@@ -37,13 +37,13 @@ def main_email(insertdata,status,timestamp):
         # add in the actual person name to the message template
         #message = message_template.substitute(PERSON_NAME=name.title())
         message = """\
-        Dear %s,
+Dear %s,
 
-        Kepada Human Resource Development,
-        Kami memberitahukan bahwa karyawan dengan nama %s ,
-        Hari ini datang %s pada tanggal dan pukul %s .
+Kepada Human Resource Development,
+Kami memberitahukan bahwa karyawan dengan nama %s ,
+Hari ini datang %s pada tanggal dan pukul %s .
 
-        Terima kasih.
+Terima kasih.
         """ % (name.title(),insertdata,status,timestamp)
 
         # Prints out the message body for our sake

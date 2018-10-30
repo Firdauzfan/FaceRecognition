@@ -8,6 +8,8 @@ import pymysql.cursors
 import time
 import datetime
 import main_facerec
+import main_facerec2
+import main_facerec3
 import os
 from bot_notif import *
 from email_notif import *
@@ -86,13 +88,13 @@ def datang(insertdata,kamera,status,frame):
                 id_teles = cursor.fetchone()
                 id_tele= id_teles.get('id_telegram')
                 poto = open('hasil_absensi/'+ insertdata + timestamp + ".png" , 'rb')
-                send_message(text, id_tele,poto)
+                send_message(text,id_tele,poto)
 
                 if status=='Terlambat':
                     poto = open('hasil_absensi/'+ insertdata + timestamp + ".png" , 'rb')
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,status,timestamp)
-                    id_tele_terlambat='205017793'
-                    send_message(text_terlambat, id_tele_terlambat, poto)
+                    id_tele_terlambat='668662889'
+                    send_message(text_terlambat,id_tele_terlambat,poto)
                     main_email(insertdata,status,timestamp)
 
         # connection is not autocommit by default. So you must commit to save
@@ -136,7 +138,7 @@ def balik(insertdata,kamera,frame):
                 id_teles = cursor.fetchone()
                 id_tele= id_teles.get('id_telegram')
                 poto = open('hasil_absensi/'+ insertdata + timestamp + ".png" , 'rb')
-                send_message(text, id_tele,poto)
+                send_message(text,id_tele,poto)
 
 
 
