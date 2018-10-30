@@ -70,7 +70,7 @@ def datang(insertdata,kamera,status,frame):
             if checking.get('ceknama')<1:
                 ts = time.time()
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-                namefile = "hasil_absensi/"+ insertdata + timestamp + ".png"
+                namefile = "hasil_absensi/"+ insertdata + timestamp + ".jpg"
                 cv2.imwrite(namefile, frame)
 
                 cekempid= "SELECT id_pegawai FROM `employee` WHERE nama_pegawai=%s"
@@ -87,15 +87,15 @@ def datang(insertdata,kamera,status,frame):
                 cursor.execute(cekid_tele, (insertdata))
                 id_teles = cursor.fetchone()
                 id_tele= id_teles.get('id_telegram')
-                poto = open('hasil_absensi/'+ insertdata + timestamp + ".png" , 'rb')
+                poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                 send_message(text,id_tele,poto)
 
                 if status=='Terlambat':
-                    poto = open('hasil_absensi/'+ insertdata + timestamp + ".png" , 'rb')
+                    poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,status,timestamp)
                     id_tele_terlambat='668662889'
                     send_message(text_terlambat,id_tele_terlambat,poto)
-                    main_email(insertdata,status,timestamp)
+                    main_email(insertdata,status,timestamp,poto)
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
@@ -126,7 +126,7 @@ def balik(insertdata,kamera,frame):
                 ts = time.time()
                 state='OUT'
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-                namefile = "hasil_absensi/"+ insertdata + timestamp + ".png"
+                namefile = "hasil_absensi/"+ insertdata + timestamp + ".jpg"
                 cv2.imwrite(namefile, frame)
                 sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s WHERE nama_pegawai=%s"
                 cursor.execute(sql, (timestamp,state,insertdata))
@@ -137,7 +137,7 @@ def balik(insertdata,kamera,frame):
                 cursor.execute(cekid_tele, (insertdata))
                 id_teles = cursor.fetchone()
                 id_tele= id_teles.get('id_telegram')
-                poto = open('hasil_absensi/'+ insertdata + timestamp + ".png" , 'rb')
+                poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                 send_message(text,id_tele,poto)
 
 

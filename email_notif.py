@@ -1,9 +1,12 @@
 import smtplib
 
 from string import Template
+import urllib.request
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+import os
 
 MY_ADDRESS = 'gspeintercon@gmail.com'
 PASSWORD = 'gspegspe'
@@ -22,7 +25,7 @@ def get_contacts(filename):
             emails.append(a_contact.split()[1])
     return names, emails
 
-def main_email(insertdata,status,timestamp):
+def main_email(insertdata,status,timestamp,poto):
     names, emails = get_contacts('mycontacts.txt') # read contacts
 
     # set up the SMTP server
@@ -46,20 +49,21 @@ Hari ini datang %s pada tanggal dan pukul %s .
 Terima kasih.
         """ % (name.title(),insertdata,status,timestamp)
 
-        # Prints out the message body for our sake
-        print(message)
-
         # setup the parameters of the message
         msg['From']=MY_ADDRESS
         msg['To']=email
         msg['Subject']="Laporan Keterlambatan Karyawan"
 
         # add in the message body
-        msg.attach(MIMEText(message, 'plain'))
+        fp=open('hasil_absensi/'+ insertdata + timestamp + ".jpg", 'rb')
+        image = MIMEImage(fp.read(), _subtype='jpg')
+        image.add_header('Content-ID', '<' + insertdata + '>')
+        msg.attach(image)
+        msg.attach(MIMEText(message))
 
         message = 'Subject: {}\n\n{}'.format(msg['Subject'], message)
         # send the message via the server set up earlier.
-        s.sendmail(msg['From'],msg['To'],message)
+        s.sendmail(msg['From'],msg['To'],msg.as_string())
         del msg
 
     # Terminate the SMTP session and close the connection
