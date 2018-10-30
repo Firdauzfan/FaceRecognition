@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 29 Okt 2018 pada 13.16
+-- Generation Time: 30 Okt 2018 pada 14.36
 -- Versi Server: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 5.6.38-2+ubuntu18.04.1+deb.sury.org+1
 
@@ -67,7 +67,8 @@ CREATE TABLE `face_absensi` (
   `waktu_keluar` datetime DEFAULT NULL,
   `kamera` varchar(30) NOT NULL,
   `note` varchar(30) DEFAULT NULL,
-  `state` varchar(30) NOT NULL
+  `state` varchar(30) NOT NULL,
+  `aktif_terlambat` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -123,7 +124,7 @@ ALTER TABLE `face_absensi`
 -- AUTO_INCREMENT for table `face_keamanan`
 --
 ALTER TABLE `face_keamanan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
