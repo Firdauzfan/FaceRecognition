@@ -68,3 +68,47 @@ Terima kasih.
 
     # Terminate the SMTP session and close the connection
     s.close()
+
+def main_email_terlambat(insertdata,status,timestamp,poto):
+    names, emails = get_contacts('mycontacts.txt') # read contacts
+
+    # set up the SMTP server
+    s = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    s.ehlo()
+    s.login(MY_ADDRESS, PASSWORD)
+
+    # For each contact, send the email:
+    for name, email in zip(names, emails):
+        msg = MIMEMultipart()       # create a message
+
+        # add in the actual person name to the message template
+        #message = message_template.substitute(PERSON_NAME=name.title())
+        message = """\
+Dear %s,
+
+Kepada Human Resource Development,
+kami memberitahukan bahwa karyawan dengan nama %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan peringatan,
+Hari ini datang %s pada tanggal dan pukul %s .
+
+Terima kasih.
+        """ % (name.title(),insertdata,status,timestamp)
+
+        # setup the parameters of the message
+        msg['From']=MY_ADDRESS
+        msg['To']=email
+        msg['Subject']="Peringatan Keterlambatan Karyawan"
+
+        # add in the message body
+        fp=open('hasil_absensi/'+ insertdata + timestamp + ".jpg", 'rb')
+        image = MIMEImage(fp.read(), _subtype='jpg')
+        image.add_header('Content-ID', '<' + insertdata + '>')
+        msg.attach(image)
+        msg.attach(MIMEText(message))
+
+        message = 'Subject: {}\n\n{}'.format(msg['Subject'], message)
+        # send the message via the server set up earlier.
+        s.sendmail(msg['From'],msg['To'],msg.as_string())
+        del msg
+
+    # Terminate the SMTP session and close the connection
+    s.close()
