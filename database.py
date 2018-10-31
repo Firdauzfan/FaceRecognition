@@ -78,12 +78,8 @@ def datang(insertdata,kamera,status,frame):
                 emp_ids = cursor.fetchone()
                 emp_id= emp_ids.get('id_pegawai')
                 state="IN"
-                if status=='Terlambat':
-                    sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`) VALUES (%s,%s,%s,%s,%s,%s,%s) "
-                    cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'1'))
-                else:
-                    sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`) VALUES (%s,%s,%s,%s,%s,%s,%s) "
-                    cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0'))
+                sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`) VALUES (%s,%s,%s,%s,%s,%s,%s) "
+                cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0'))
                 os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
 
                 text = 'Selamat Datang %s , Hari ini kamu datang %s' %(insertdata,status)
@@ -95,9 +91,11 @@ def datang(insertdata,kamera,status,frame):
                 send_message(text,id_tele,poto)
 
                 if status=='Terlambat':
+                    sql = "UPDATE `face_absensi` SET `aktif_terlambat`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+                    cursor.execute(sql, (insertdata))
                     poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,status,timestamp)
-                    id_tele_terlambat='205017793'
+                    id_tele_terlambat='668662889'
                     send_message(text_terlambat,id_tele_terlambat,poto)
                     main_email(insertdata,status,timestamp,poto)
 
@@ -108,7 +106,7 @@ def datang(insertdata,kamera,status,frame):
                     if checkingterlambat.get('ceknama')>=3:
                         poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                         text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan peringatan, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,status,timestamp)
-                        id_tele_terlambat='205017793'
+                        id_tele_terlambat='668662889'
                         send_message(text_terlambat,id_tele_terlambat,poto)
                         main_email_terlambat(insertdata,status,timestamp,poto)
                         if checkingterlambat.get('ceknama')==3:
