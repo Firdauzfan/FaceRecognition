@@ -25,7 +25,7 @@ def get_contacts(filename):
             emails.append(a_contact.split()[1])
     return names, emails
 
-def main_email(insertdata,status,timestamp,poto):
+def main_email(insertdata,status,timestamp,poto,no_hp):
     names, emails = get_contacts('mycontacts.txt') # read contacts
 
     # set up the SMTP server
@@ -43,11 +43,11 @@ def main_email(insertdata,status,timestamp,poto):
 Dear %s,
 
 Kepada Human Resource Development,
-Kami memberitahukan bahwa karyawan dengan nama %s ,
+Kami memberitahukan bahwa karyawan dengan nama %s dan no hp = %s,
 Hari ini datang %s pada tanggal dan pukul %s .
 
 Terima kasih.
-        """ % (name.title(),insertdata,status,timestamp)
+        """ % (name.title(),insertdata,no_hp,status,timestamp)
 
         # setup the parameters of the message
         msg['From']=MY_ADDRESS
@@ -69,7 +69,7 @@ Terima kasih.
     # Terminate the SMTP session and close the connection
     s.close()
 
-def main_email_terlambat(insertdata,status,timestamp,poto):
+def main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn):
     names, emails = get_contacts('mycontacts.txt') # read contacts
 
     # set up the SMTP server
@@ -87,11 +87,11 @@ def main_email_terlambat(insertdata,status,timestamp,poto):
 Dear %s,
 
 Kepada Human Resource Development,
-kami memberitahukan bahwa karyawan dengan nama %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan peringatan,
+kami memberitahukan bahwa karyawan dengan nama %s dan no hp = %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s,
 Hari ini datang %s pada tanggal dan pukul %s .
 
 Terima kasih.
-        """ % (name.title(),insertdata,status,timestamp)
+        """ % (name.title(),insertdata,no_hp,warn,status,timestamp)
 
         # setup the parameters of the message
         msg['From']=MY_ADDRESS
