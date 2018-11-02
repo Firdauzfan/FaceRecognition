@@ -12,6 +12,7 @@ from align_custom import AlignCustom
 from face_feature import FaceFeature
 from mtcnn_detect import MTCNNDetect
 from database import *
+from notif import *
 from tf_graph import FaceRecGraph
 import argparse
 import sys
@@ -48,9 +49,9 @@ Images from Video Capture -> detect faces' regions -> crop those faces and align
 def camera_recog():
     notify = Notify()
     print("[INFO] camera sensor warming up...")
-    #vs = cv2.VideoCapture(0); #get input from webcam
+    vs = cv2.VideoCapture(0); #get input from webcam
     #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/501")
 
     while True:
@@ -85,14 +86,16 @@ def camera_recog():
                     if timestamp>'06:00:00' and timestamp<'08:30:00':
                         status="Tepat Waktu"
                         insertdata= data(recog_data[i][0],kamera)
-                        insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                        #notif=notif_datang(recog_data[i][0],status)
                     elif timestamp>'08:30:00' and timestamp<'17:30:00':
                         status="Terlambat"
                         insertdata= data(recog_data[i][0],kamera)
                         insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                        #notif=notif_datang(recog_data[i][0],status)
                     elif timestamp>'17:30:00' and timestamp<'23:59:00':
                         insertdata= data(recog_data[i][0],kamera)
                         insertbalik= balik(recog_data[i][0],kamera,frame)
+                        #notif=balik_notif(recog_data[i][0])
                     else:
                         insertdata= data(recog_data[i][0],kamera)
 

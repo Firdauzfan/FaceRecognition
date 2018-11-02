@@ -78,44 +78,23 @@ def datang(insertdata,kamera,status,frame):
                 dataemp = cursor.fetchone()
                 emp_id= dataemp.get('id_pegawai')
                 state="IN"
-                sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`) VALUES (%s,%s,%s,%s,%s,%s,%s) "
-                cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0'))
-                os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
+                sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`,`aktif_notif`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) "
+                cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0','1'))
 
-                text = 'Selamat Datang %s , Hari ini kamu datang %s' %(insertdata,status)
-                id_tele= dataemp.get('id_telegram')
-                poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
-                send_message(text,id_tele,poto)
-
-                warning1= dataemp.get('warning1')
-                warning2= dataemp.get('warning2')
-                warning3= dataemp.get('warning3')
-                no_hp= dataemp.get('no_hp')
 
                 if status=='Terlambat':
                     sql = "UPDATE `face_absensi` SET `aktif_terlambat`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                     cursor.execute(sql, (insertdata))
-                    text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,status,timestamp)
-                    id_tele_terlambat='668662889'
-                    poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
-                    send_message(text_terlambat,id_tele_terlambat,poto)
-                    main_email(insertdata,status,timestamp,poto,no_hp)
 
                     ceksqlterlambat= "SELECT COUNT(nama_pegawai) AS ceknama FROM `face_absensi` WHERE nama_pegawai=%s AND aktif_terlambat=1"
                     cursor.execute(ceksqlterlambat, (insertdata))
                     checkingterlambat = cursor.fetchone()
                     #print(checking)
                     if checkingterlambat.get('ceknama')==3:
-                        poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                         if warning1==None and warning2==None and warning3==None:
                             warn='Surat Peringatan 1'
                             updatewarning= "UPDATE `employee` SET `warning1`=%s WHERE nama_pegawai=%s"
                             cursor.execute(updatewarning, (warn,insertdata))
-
-                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
-                            id_tele_terlambat='668662889'
-                            send_message(text_terlambat,id_tele_terlambat,poto)
-                            main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
 
                             updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
                             cursor.execute(updateterlambat, (insertdata))
@@ -124,22 +103,12 @@ def datang(insertdata,kamera,status,frame):
                             updatewarning= "UPDATE `employee` SET `warning2`=%s WHERE nama_pegawai=%s"
                             cursor.execute(updatewarning, (warn,insertdata))
 
-                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
-                            id_tele_terlambat='668662889'
-                            send_message(text_terlambat,id_tele_terlambat,poto)
-                            main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
-
                             updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
                             cursor.execute(updateterlambat, (insertdata))
                         else:
                             warn='Penalty Sesuai Kesepakatan'
                             updatewarning= "UPDATE `employee` SET `warning3`=%s WHERE nama_pegawai=%s"
                             cursor.execute(updatewarning, (warn,insertdata))
-
-                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
-                            id_tele_terlambat='668662889'
-                            send_message(text_terlambat,id_tele_terlambat,poto)
-                            main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
 
                             updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
                             cursor.execute(updateterlambat, (insertdata))
@@ -174,19 +143,8 @@ def balik(insertdata,kamera,frame):
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
                 namefile = "hasil_absensi/"+ insertdata + timestamp + ".jpg"
                 cv2.imwrite(namefile, frame)
-                sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s WHERE nama_pegawai=%s"
-                cursor.execute(sql, (timestamp,state,insertdata))
-                os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
-
-                text = 'Selamat Tinggal %s , Hati-hati di perjalanan pulang' %insertdata
-                cekid_tele= "SELECT id_telegram FROM `employee` WHERE nama_pegawai=%s"
-                cursor.execute(cekid_tele, (insertdata))
-                id_teles = cursor.fetchone()
-                id_tele= id_teles.get('id_telegram')
-                poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
-                send_message(text,id_tele,poto)
-
-
+                sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif` WHERE nama_pegawai=%s"
+                cursor.execute(sql, (timestamp,state,'1',insertdata))
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
