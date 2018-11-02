@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 01 Nov 2018 pada 15.34
+-- Generation Time: 02 Nov 2018 pada 16.27
 -- Versi Server: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 5.6.38-2+ubuntu18.04.1+deb.sury.org+1
 
@@ -44,7 +44,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `id_pegawai`, `id_telegram`, `nama_pegawai`, `email`, `no_hp`, `divisi`, `warning1`, `warning2`, `warning3`) VALUES
-(1, 12345, 205017793, 'Firdauz Fanani', 'firdauzfanani@gmail.com', '081567920578', 'IT', NULL, NULL, NULL),
+(1, 12345, 205017793, 'Firdauz Fanani', 'firdauzfanani@gmail.com', '081567920578', 'IT', 'Surat Peringatan 1', 'Coaching By HRD', 'Penalty Sesuai Kesepakatan'),
 (2, 12346, 668662889, 'Riyadi Agung Suharto', '0', '0817737727', 'IT', NULL, NULL, NULL),
 (3, 12347, 750150427, 'Teoderikus Ferdian', '0', '087839659675', 'Marketing', NULL, NULL, NULL),
 (4, 12348, 376571445, 'Wahyudi Prasatia', '0', '085363236007', 'Marketing', NULL, NULL, NULL),
@@ -72,26 +72,27 @@ CREATE TABLE `face_absensi` (
   `kamera` varchar(30) NOT NULL,
   `note` varchar(30) DEFAULT NULL,
   `state` varchar(30) NOT NULL,
-  `aktif_terlambat` tinyint(1) DEFAULT NULL
+  `aktif_terlambat` tinyint(1) DEFAULT NULL,
+  `aktif_notif` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `face_absensi`
 --
 
-INSERT INTO `face_absensi` (`id`, `employee_id`, `nama_pegawai`, `waktu_masuk`, `waktu_keluar`, `kamera`, `note`, `state`, `aktif_terlambat`) VALUES
-(1, 12345, 'Firdauz Fanani', '2018-10-31 06:36:16', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(2, 12354, 'Abdul Rohman', '2018-10-31 07:25:39', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(3, 12343, 'Muhammad Yasir Abdulazis', '2018-10-31 08:12:58', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(4, 12347, 'Teoderikus Ferdian', '2018-10-31 08:17:59', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(5, 12348, 'Wahyudi Prasatia', '2018-10-31 08:20:26', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(6, 12342, 'Faza Ghassani', '2018-10-31 08:21:01', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(7, 12350, 'Dwi Prasetyo', '2018-10-31 08:22:43', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(8, 12341, 'Vicky Yuliandi Siahaan', '2018-10-31 08:23:18', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0),
-(9, 12346, 'Riyadi Agung Suharto', '2018-10-31 11:24:36', NULL, 'kamera 1', 'Terlambat', 'IN', 1),
-(10, 12349, 'Muhammad Reiza Syaifullah', '2018-10-31 08:30:35', NULL, 'kamera 1', 'Terlambat', 'IN', 1),
-(11, 12340, 'Liza A Barezi', '2018-10-31 08:32:00', NULL, 'kamera 1', 'Terlambat', 'IN', 1),
-(12, 12351, 'Imam Sulton', '2018-10-31 08:33:15', NULL, 'kamera 1', 'Terlambat', 'IN', 1);
+INSERT INTO `face_absensi` (`id`, `employee_id`, `nama_pegawai`, `waktu_masuk`, `waktu_keluar`, `kamera`, `note`, `state`, `aktif_terlambat`, `aktif_notif`) VALUES
+(1, 12345, 'Firdauz Fanani', '2018-10-31 06:36:16', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(2, 12354, 'Abdul Rohman', '2018-10-31 07:25:39', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(3, 12343, 'Muhammad Yasir Abdulazis', '2018-10-31 08:12:58', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(4, 12347, 'Teoderikus Ferdian', '2018-10-31 08:17:59', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(5, 12348, 'Wahyudi Prasatia', '2018-10-31 08:20:26', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(6, 12342, 'Faza Ghassani', '2018-10-31 08:21:01', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(7, 12350, 'Dwi Prasetyo', '2018-10-31 08:22:43', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(8, 12341, 'Vicky Yuliandi Siahaan', '2018-10-31 08:23:18', NULL, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(9, 12346, 'Riyadi Agung Suharto', '2018-10-31 11:24:36', NULL, 'kamera 1', 'Terlambat', 'IN', 1, 0),
+(10, 12349, 'Muhammad Reiza Syaifullah', '2018-10-31 08:30:35', NULL, 'kamera 1', 'Terlambat', 'IN', 1, 0),
+(11, 12340, 'Liza A Barezi', '2018-10-31 08:32:00', NULL, 'kamera 1', 'Terlambat', 'IN', 1, 0),
+(12, 12351, 'Imam Sulton', '2018-10-31 08:33:15', NULL, 'kamera 1', 'Terlambat', 'IN', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -178,7 +179,58 @@ INSERT INTO `face_keamanan` (`id`, `nama`, `waktu`, `kamera`) VALUES
 (65, 'Firdauz Fanani', '2018-11-01 15:28:00', 'kamera 1'),
 (66, 'Firdauz Fanani', '2018-11-01 15:29:10', 'kamera 1'),
 (67, 'Firdauz Fanani', '2018-11-01 15:30:13', 'kamera 1'),
-(68, 'Firdauz Fanani', '2018-11-01 15:31:00', 'kamera 1');
+(68, 'Firdauz Fanani', '2018-11-01 15:31:00', 'kamera 1'),
+(69, 'Firdauz Fanani', '2018-11-02 13:26:21', 'kamera 1'),
+(70, 'Firdauz Fanani', '2018-11-02 13:27:00', 'kamera 1'),
+(71, 'Firdauz Fanani', '2018-11-02 13:36:22', 'kamera 1'),
+(72, 'Firdauz Fanani', '2018-11-02 13:40:52', 'kamera 1'),
+(73, 'Firdauz Fanani', '2018-11-02 13:42:56', 'kamera 1'),
+(74, 'Firdauz Fanani', '2018-11-02 13:46:08', 'kamera 1'),
+(75, 'Firdauz Fanani', '2018-11-02 13:47:00', 'kamera 1'),
+(76, 'Firdauz Fanani', '2018-11-02 13:48:49', 'kamera 1'),
+(77, 'Firdauz Fanani', '2018-11-02 13:51:53', 'kamera 1'),
+(78, 'Firdauz Fanani', '2018-11-02 13:54:32', 'kamera 1'),
+(79, 'Firdauz Fanani', '2018-11-02 13:55:13', 'kamera 1'),
+(80, 'Firdauz Fanani', '2018-11-02 13:56:10', 'kamera 1'),
+(81, 'Firdauz Fanani', '2018-11-02 13:59:18', 'kamera 1'),
+(82, 'Firdauz Fanani', '2018-11-02 14:00:48', 'kamera 1'),
+(83, 'Firdauz Fanani', '2018-11-02 14:01:00', 'kamera 1'),
+(84, 'Firdauz Fanani', '2018-11-02 14:03:27', 'kamera 1'),
+(85, 'Firdauz Fanani', '2018-11-02 14:04:04', 'kamera 1'),
+(86, 'Firdauz Fanani', '2018-11-02 14:05:00', 'kamera 1'),
+(87, 'Firdauz Fanani', '2018-11-02 14:06:00', 'kamera 1'),
+(88, 'Firdauz Fanani', '2018-11-02 14:07:00', 'kamera 1'),
+(89, 'Firdauz Fanani', '2018-11-02 14:08:00', 'kamera 1'),
+(90, 'Firdauz Fanani', '2018-11-02 14:09:00', 'kamera 1'),
+(91, 'Firdauz Fanani', '2018-11-02 14:18:25', 'kamera 1'),
+(92, 'Firdauz Fanani', '2018-11-02 14:19:00', 'kamera 1'),
+(93, 'Firdauz Fanani', '2018-11-02 14:20:25', 'kamera 1'),
+(94, 'Firdauz Fanani', '2018-11-02 14:22:14', 'kamera 1'),
+(95, 'Muhammad Yasir Abdulazis', '2018-11-02 14:22:21', 'kamera 1'),
+(96, 'Firdauz Fanani', '2018-11-02 14:23:42', 'kamera 1'),
+(97, 'Muhammad Yasir Abdulazis', '2018-11-02 14:23:43', 'kamera 1'),
+(98, 'Firdauz Fanani', '2018-11-02 14:24:10', 'kamera 1'),
+(99, 'Muhammad Yasir Abdulazis', '2018-11-02 14:24:10', 'kamera 1'),
+(100, 'Firdauz Fanani', '2018-11-02 14:25:14', 'kamera 1'),
+(101, 'Firdauz Fanani', '2018-11-02 14:26:00', 'kamera 1'),
+(102, 'Muhammad Yasir Abdulazis', '2018-11-02 14:26:12', 'kamera 1'),
+(103, 'Firdauz Fanani', '2018-11-02 14:27:14', 'kamera 1'),
+(104, 'Firdauz Fanani', '2018-11-02 14:28:00', 'kamera 1'),
+(105, 'Firdauz Fanani', '2018-11-02 14:29:53', 'kamera 1'),
+(106, 'Muhammad Yasir Abdulazis', '2018-11-02 14:29:56', 'kamera 1'),
+(107, 'Firdauz Fanani', '2018-11-02 14:30:00', 'kamera 1'),
+(108, 'Muhammad Yasir Abdulazis', '2018-11-02 14:30:05', 'kamera 1'),
+(109, 'Firdauz Fanani', '2018-11-02 14:31:04', 'kamera 1'),
+(110, 'Firdauz Fanani', '2018-11-02 14:32:28', 'kamera 1'),
+(111, 'Muhammad Yasir Abdulazis', '2018-11-02 14:32:54', 'kamera 1'),
+(112, 'Firdauz Fanani', '2018-11-02 14:33:00', 'kamera 1'),
+(113, 'Muhammad Yasir Abdulazis', '2018-11-02 14:33:05', 'kamera 1'),
+(114, 'Firdauz Fanani', '2018-11-02 14:34:27', 'kamera 1'),
+(115, 'Firdauz Fanani', '2018-11-02 16:01:12', 'kamera 1'),
+(116, 'Firdauz Fanani', '2018-11-02 16:02:00', 'kamera 1'),
+(117, 'Muhammad Yasir Abdulazis', '2018-11-02 16:02:15', 'kamera 1'),
+(118, 'Firdauz Fanani', '2018-11-02 16:03:00', 'kamera 1'),
+(119, 'Muhammad Yasir Abdulazis', '2018-11-02 16:03:00', 'kamera 1');
 
 --
 -- Indexes for dumped tables
@@ -220,7 +272,7 @@ ALTER TABLE `face_absensi`
 -- AUTO_INCREMENT for table `face_keamanan`
 --
 ALTER TABLE `face_keamanan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
