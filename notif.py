@@ -102,7 +102,7 @@ def notif_datang(insertdata,status):
     finally:
         connection.close()
 
-def balik_notif(arg):
+def balik_notif(insertdata):
     connection = pymysql.connect(host='localhost',
                                  user='root',
                                  password='root',
@@ -123,7 +123,7 @@ def balik_notif(arg):
                 cekwaktu= "SELECT waktu_keluar FROM `face_absensi` WHERE nama_pegawai=%s AND aktif_notif='1' AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                 cursor.execute(cekwaktu, (insertdata))
                 checkingwaktu = cursor.fetchone()
-                waktukeluar=checkingwaktu.get('waktu_masuk')
+                waktukeluar=checkingwaktu.get('waktu_keluar')
                 waktu='%s' %waktukeluar
 
                 os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
@@ -135,6 +135,7 @@ def balik_notif(arg):
                 id_tele= id_teles.get('id_telegram')
                 poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                 send_message(text,id_tele,poto)
+                time.sleep(5)
 
             sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
             cursor.execute(sql, (insertdata))

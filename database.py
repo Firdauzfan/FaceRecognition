@@ -143,8 +143,8 @@ def balik(insertdata,kamera,frame):
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
                 namefile = "hasil_absensi/"+ insertdata + timestamp + ".jpg"
                 cv2.imwrite(namefile, frame)
-                sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif=%s` WHERE nama_pegawai=%s"
-                cursor.execute(sql, (timestamp,state,'1',insertdata))
+                sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif`='1' WHERE nama_pegawai=%s"
+                cursor.execute(sql, (timestamp,state,insertdata))
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.

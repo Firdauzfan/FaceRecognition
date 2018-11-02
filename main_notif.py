@@ -46,10 +46,10 @@ def notif():
                     if timestamp>'06:00:00' and timestamp<'08:30:00':
                         status="Tepat Waktu"
                         notif=notif_datang(insertdata,status)
+                    # elif timestamp>'08:30:00' and timestamp<'17:30:00':
+                    #     status="Terlambat"
+                    #     notif=notif_datang(insertdata,status)
                     elif timestamp>'08:30:00' and timestamp<'17:30:00':
-                        status="Terlambat"
-                        notif=notif_datang(insertdata,status)
-                    elif timestamp>'17:30:00' and timestamp<'23:59:00':
                         notif=balik_notif(insertdata)
             # connection is not autocommit by default. So you must commit to save
             # your changes.

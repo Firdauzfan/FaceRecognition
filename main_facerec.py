@@ -86,11 +86,11 @@ def camera_recog():
                     if timestamp>'06:00:00' and timestamp<'08:30:00':
                         status="Tepat Waktu"
                         insertdata= data(recog_data[i][0],kamera)
+                    # elif timestamp>'08:30:00' and timestamp<'17:30:00':
+                    #     status="Terlambat"
+                    #     insertdata= data(recog_data[i][0],kamera)
+                    #     insertdatang= datang(recog_data[i][0],kamera,status,frame)
                     elif timestamp>'08:30:00' and timestamp<'17:30:00':
-                        status="Terlambat"
-                        insertdata= data(recog_data[i][0],kamera)
-                        insertdatang= datang(recog_data[i][0],kamera,status,frame)
-                    elif timestamp>'17:30:00' and timestamp<'23:59:00':
                         insertdata= data(recog_data[i][0],kamera)
                         insertbalik= balik(recog_data[i][0],kamera,frame)
                     else:
