@@ -95,9 +95,9 @@ def datang(insertdata,kamera,status,frame):
                 if status=='Terlambat':
                     sql = "UPDATE `face_absensi` SET `aktif_terlambat`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                     cursor.execute(sql, (insertdata))
-                    poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,status,timestamp)
                     id_tele_terlambat='668662889'
+                    poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
                     send_message(text_terlambat,id_tele_terlambat,poto)
                     main_email(insertdata,status,timestamp,poto,no_hp)
 
@@ -105,45 +105,44 @@ def datang(insertdata,kamera,status,frame):
                     cursor.execute(ceksqlterlambat, (insertdata))
                     checkingterlambat = cursor.fetchone()
                     #print(checking)
-                    if checkingterlambat.get('ceknama')>=3:
+                    if checkingterlambat.get('ceknama')==3:
                         poto = open('hasil_absensi/'+ insertdata + timestamp + ".jpg" , 'rb')
-                        if checkingterlambat.get('ceknama')==3:
-                            if warning1==None and warning2==None and warning3==None:
-                                warn='Surat Peringatan 1'
-                                updatewarning= "UPDATE `employee` SET `warning1`=%s WHERE nama_pegawai=%s"
-                                cursor.execute(updatewarning, (warn,insertdata))
+                        if warning1==None and warning2==None and warning3==None:
+                            warn='Surat Peringatan 1'
+                            updatewarning= "UPDATE `employee` SET `warning1`=%s WHERE nama_pegawai=%s"
+                            cursor.execute(updatewarning, (warn,insertdata))
 
-                                text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
-                                id_tele_terlambat='668662889'
-                                send_message(text_terlambat,id_tele_terlambat,poto)
-                                main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
+                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
+                            id_tele_terlambat='668662889'
+                            send_message(text_terlambat,id_tele_terlambat,poto)
+                            main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
 
-                                updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
-                                cursor.execute(updateterlambat, (insertdata))
-                            elif warning1 !=None and warning2==None and warning3 ==None:
-                                warn='Coaching By HRD'
-                                updatewarning= "UPDATE `employee` SET `warning2`=%s WHERE nama_pegawai=%s"
-                                cursor.execute(updatewarning, (warn,insertdata))
+                            updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
+                            cursor.execute(updateterlambat, (insertdata))
+                        elif warning1 !=None and warning2==None and warning3 ==None:
+                            warn='Coaching By HRD'
+                            updatewarning= "UPDATE `employee` SET `warning2`=%s WHERE nama_pegawai=%s"
+                            cursor.execute(updatewarning, (warn,insertdata))
 
-                                text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
-                                id_tele_terlambat='668662889'
-                                send_message(text_terlambat,id_tele_terlambat,poto)
-                                main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
+                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
+                            id_tele_terlambat='668662889'
+                            send_message(text_terlambat,id_tele_terlambat,poto)
+                            main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
 
-                                updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
-                                cursor.execute(updateterlambat, (insertdata))
-                            else:
-                                warn='Penalty Sesuai Kesepakatan'
-                                updatewarning= "UPDATE `employee` SET `warning3`=%s WHERE nama_pegawai=%s"
-                                cursor.execute(updatewarning, (warn,insertdata))
+                            updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
+                            cursor.execute(updateterlambat, (insertdata))
+                        else:
+                            warn='Penalty Sesuai Kesepakatan'
+                            updatewarning= "UPDATE `employee` SET `warning3`=%s WHERE nama_pegawai=%s"
+                            cursor.execute(updatewarning, (warn,insertdata))
 
-                                text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
-                                id_tele_terlambat='668662889'
-                                send_message(text_terlambat,id_tele_terlambat,poto)
-                                main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
+                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,timestamp)
+                            id_tele_terlambat='668662889'
+                            send_message(text_terlambat,id_tele_terlambat,poto)
+                            main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn)
 
-                                updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
-                                cursor.execute(updateterlambat, (insertdata))
+                            updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
+                            cursor.execute(updateterlambat, (insertdata))
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         connection.commit()

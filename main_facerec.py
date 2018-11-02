@@ -48,9 +48,9 @@ Images from Video Capture -> detect faces' regions -> crop those faces and align
 def camera_recog():
     notify = Notify()
     print("[INFO] camera sensor warming up...")
-    vs = cv2.VideoCapture(0); #get input from webcam
+    #vs = cv2.VideoCapture(0); #get input from webcam
     #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/501")
 
     while True:
@@ -100,9 +100,10 @@ def camera_recog():
                         #notify.send('%s Memasuki Ruangan Terlarang' %recog_data[i][0])
 
         cv2.imshow("Frame",frame)
-        key = cv2.waitKey(40) & 0xFF
+        key = cv2.waitKey(5) & 0xFF
         if key == ord("q"):
             break
+            vs.release() # cleanup the camera and close any open windows
 '''
 facerec_128D.txt Data Structure:
 {
