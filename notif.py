@@ -38,7 +38,6 @@ def notif_datang(insertdata,status):
                 cekempid= "SELECT id_telegram,id_pegawai,warning1,warning2,warning3,no_hp FROM `employee` WHERE nama_pegawai=%s"
                 cursor.execute(cekempid, (insertdata))
                 dataemp = cursor.fetchone()
-                os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
 
                 text = 'Selamat Datang %s , Hari ini kamu datang %s' %(insertdata,status)
                 id_tele= dataemp.get('id_telegram')
@@ -125,8 +124,6 @@ def balik_notif(insertdata):
                 checkingwaktu = cursor.fetchone()
                 waktukeluar=checkingwaktu.get('waktu_keluar')
                 waktu='%s' %waktukeluar
-
-                os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
 
                 text = 'Selamat Tinggal %s , Hati-hati di perjalanan pulang' %insertdata
                 cekid_tele= "SELECT id_telegram FROM `employee` WHERE nama_pegawai=%s"

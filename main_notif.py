@@ -39,14 +39,16 @@ def notif():
                 checking = cursor.fetchone()
                 print(checking.get('ceknama'))
                 if checking.get('ceknama')>=1:
-                    ceksql= "SELECT nama_pegawai FROM `face_absensi` WHERE DATE(`waktu_masuk`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
+                    ceksql= "SELECT nama_pegawai,waktu_masuk FROM `face_absensi` WHERE DATE(`waktu_masuk`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
                     cursor.execute(ceksql)
                     checking = cursor.fetchone()
                     insertdata=checking.get('nama_pegawai')
-                    if timestamp>'06:00:00' and timestamp<'08:30:00':
+                    waktum=checking.get('waktu_masuk')
+                    timemasuk=waktum.strftime('%H:%M:%S')
+                    if timemasuk>'06:00:00' and timemasuk<'08:30:00':
                         status="Tepat Waktu"
                         notif=notif_datang(insertdata,status)
-                    elif timestamp>'08:30:00' and timestamp<'17:30:00':
+                    elif timemasuk>'08:30:00' and timemasuk<'17:30:00':
                         status="Terlambat"
                         notif=notif_datang(insertdata,status)
                     elif timestamp>'17:30:00' and timestamp<'23:59:00':

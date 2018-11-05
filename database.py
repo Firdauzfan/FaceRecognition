@@ -80,6 +80,7 @@ def datang(insertdata,kamera,status,frame):
                 state="IN"
                 sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`,`aktif_notif`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) "
                 cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0','1'))
+                os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
 
 
                 if status=='Terlambat':
@@ -145,6 +146,7 @@ def balik(insertdata,kamera,frame):
                 cv2.imwrite(namefile, frame)
                 sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif`='1' WHERE nama_pegawai=%s"
                 cursor.execute(sql, (timestamp,state,insertdata))
+                os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
