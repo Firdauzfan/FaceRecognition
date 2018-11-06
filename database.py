@@ -96,7 +96,7 @@ def datang(insertdata,kamera,status,frame):
                     cursor.execute(ceksqlterlambat, (insertdata))
                     checkingterlambat = cursor.fetchone()
                     #print(checking)
-                    if checkingterlambat.get('ceknama')==3:
+                    if checkingterlambat.get('ceknama')==5:
                         if warning1==None and warning2==None and warning3==None:
                             warn='Surat Peringatan 1'
                             updatewarning= "UPDATE `employee` SET `warning1`=%s WHERE nama_pegawai=%s"
@@ -149,7 +149,7 @@ def balik(insertdata,kamera,frame):
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
                 namefile = "hasil_absensi/"+ insertdata + timestamp + ".jpg"
                 cv2.imwrite(namefile, frame)
-                sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif`='1' WHERE nama_pegawai=%s"
+                sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                 cursor.execute(sql, (timestamp,state,insertdata))
                 os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
 
