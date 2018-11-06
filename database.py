@@ -82,6 +82,11 @@ def datang(insertdata,kamera,status,frame):
                 cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0','1'))
                 os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
 
+                warning1= dataemp.get('warning1')
+                warning2= dataemp.get('warning2')
+                warning3= dataemp.get('warning3')
+                no_hp= dataemp.get('no_hp')
+
 
                 if status=='Terlambat':
                     sql = "UPDATE `face_absensi` SET `aktif_terlambat`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
