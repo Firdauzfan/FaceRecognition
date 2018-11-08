@@ -90,11 +90,11 @@ def datang(insertdata,kamera,status,frame):
                 dataemp = cursor.fetchone()
                 emp_id= dataemp.get('id_pegawai')
                 state="IN"
-                sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`,`aktif_notif`,`selisih_waktu`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) "
+                sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`,`aktif_notif`,`selisih_waktu`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) "
                 cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0','1','0'))
                 os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
 
-                selisih_wkt="SELECT (TIME_TO_SEC(waktu_masuk) - TIME_TO_SEC('08:30:00'))/60 AS selisih_waktu FROM `face_absensi` WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+                selisih_wkt="SELECT (TIME_TO_SEC(waktu_masuk) - TIME_TO_SEC('17:30:00'))/60 AS selisih_waktu FROM `face_absensi` WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                 cursor.execute(selisih_wkt, (insertdata))
                 selisihwaktu = cursor.fetchone()
                 data_selisih=selisihwaktu.get('selisih_waktu')
