@@ -155,7 +155,6 @@ def balik(insertdata,kamera,frame):
     connection = pymysql.connect(host='localhost',
                                  user='root',
                                  password='root',
-                                 db='face_recognition',
                                  unix_socket="/var/run/mysqld/mysqld.sock",
                                  port=3306,
                                  charset='utf8mb4',
@@ -179,46 +178,6 @@ def balik(insertdata,kamera,frame):
                 sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                 cursor.execute(sql, (timestamp,state,insertdata))
                 os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
-
-        # connection is not autocommit by default. So you must commit to save
-        # your changes.
-        connection.commit()
-        return True
-
-    except:
-        pass
-
-    finally:
-        connection.close()
-
-def checking(insertdata,kamera):
-    connection = pymysql.connect(host='localhost',
-                                 user='root',
-                                 password='root',
-                                 db='face_recognition',
-                                 unix_socket="/var/run/mysqld/mysqld.sock",
-                                 port=3306,
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor)
-
-
-    try:
-        with connection.cursor() as cursor:
-            # Create a new record
-            ceksql= "SELECT `divisi`,`no_hp` FROM `employee` WHERE nama_pegawai=%s"
-            cursor.execute(ceksql, (insertdata))
-            checking = cursor.fetchone()
-
-            no_hp=checking.get('no_hp')
-            #print(checking.get('divisi'))
-            if checking.get('divisi')=='IT' and kamera=='kamera 1':
-                time.sleep(2)
-                notify = Notify()
-                notify.send('%s Memasuki Ruangan Terlarang' %insertdata)
-                text = '%s , Memasuki Ruangan Terlarang dengan nomor hp %s' %(insertdata,no_hp)
-                id_tele= '205017793'
-                send_message_kemananan(text, id_tele)
-
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.

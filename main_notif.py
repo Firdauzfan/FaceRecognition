@@ -61,7 +61,10 @@ def notif():
             connection.commit()
 
         except:
-            continue
+            pass
+
+        finally:
+            connection.close()
 
 def keamanan_notif():
     while True:
@@ -80,14 +83,15 @@ def keamanan_notif():
                 cursor.execute(ceksql)
                 checking = cursor.fetchone()
                 print(checking.get('ceknama'))
+
+                ceknama= "SELECT nama,waktu FROM `face_keamanan` WHERE DATE(`waktu`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
+                cursor.execute(ceknama)
+                checkingnama = cursor.fetchone()
+                checkingjeneng=checkingnama.get('nama')
                 if checking.get('ceknama')>=1:
-                    ceknama= "SELECT nama,waktu FROM `face_keamanan` WHERE DATE(`waktu`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
-                    cursor.execute(ceknama)
-                    checkingnama = cursor.fetchone()
-                    checkingjeneng=checkingnama.get('nama')
-
-                    waktudtc=checkingnama.get('waktu')
-
+                    sql = "UPDATE `face_keamanan` SET `aktif_notif`=0 WHERE nama=%s"
+                    cursor.execute(sql, (insertdata))
+                    
                     ceksqli= "SELECT `divisi`,`no_hp` FROM `employee` WHERE nama_pegawai=%s"
                     cursor.execute(ceksqli, (checkingjeneng))
                     checkingi = cursor.fetchone()
@@ -98,17 +102,18 @@ def keamanan_notif():
                     notify = Notify()
                     notify.send('%s Memasuki Ruangan Terlarang' %checkingjeneng)
                     text = '%s , dari Divisi %s dengan nomor hp %s Memasuki Ruangan Terlarang' %(checkingjeneng,divisi,no_hp)
-                    id_tele= '205017793'
+                    id_tele= '668662889'
                     send_message_kemananan(text, id_tele)
 
-                    sql = "UPDATE `face_keamanan` SET `aktif_notif`='0' WHERE nama=%s AND waktu =%s"
-                    cursor.execute(sql, (checkingjeneng,waktudtc))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
 
         except:
-            continue
+            pass
+
+        finally:
+            connection.close()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
