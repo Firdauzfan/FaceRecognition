@@ -16,6 +16,8 @@ def notif_datang(insertdata,status):
                                  user='root',
                                  password='root',
                                  db='face_recognition',
+                                 unix_socket="/var/run/mysqld/mysqld.sock",
+                                 port=3306,
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
@@ -49,48 +51,47 @@ def notif_datang(insertdata,status):
                 warning3= dataemp.get('warning3')
                 no_hp= dataemp.get('no_hp')
 
-                time.sleep(5)
-
                 if status=='Terlambat':
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,status,waktu)
                     id_tele_terlambat='668662889'
                     poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                     send_message(text_terlambat,id_tele_terlambat,poto)
                     main_email(insertdata,status,waktu,poto,no_hp)
-                    time.sleep(5)
 
                     ceksqlterlambat= "SELECT COUNT(nama_pegawai) AS ceknama FROM `face_absensi` WHERE nama_pegawai=%s AND aktif_terlambat=1"
                     cursor.execute(ceksqlterlambat, (insertdata))
                     checkingterlambat = cursor.fetchone()
+
+                    ceksqlwaktutelat="SELECT SUM(selisih_waktu) AS waktutelat FROM `face_absensi` WHERE nama_pegawai=%s AND MONTH(waktu_masuk)=MONTH(CURDATE())"
+                    cursor.execute(ceksqlwaktutelat, (insertdata))
+                    checkingwaktutelat = cursor.fetchone()
                     #print(checking)
-                    if checkingterlambat.get('ceknama')==3:
+                    if checkingterlambat.get('ceknama')==6 or checkingwaktutelat.get('waktutelat')>30:
                         poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                         if warning1==None and warning2==None and warning3==None:
                             warn='Surat Peringatan 1'
 
-                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
-                            id_tele_terlambat='668662889'
+                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
+                            id_tele_terlambat='205017793'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
-                            time.sleep(5)
 
                         elif warning1 !=None and warning2==None and warning3 ==None:
                             warn='Coaching By HRD'
 
-                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
-                            id_tele_terlambat='668662889'
+                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
+                            id_tele_terlambat='205017793'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
-                            time.sleep(5)
 
                         else:
                             warn='Penalty Sesuai Kesepakatan'
 
-                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
-                            id_tele_terlambat='668662889'
+                            text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
+                            id_tele_terlambat='205017793'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
-                            time.sleep(5)
+
             sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
             cursor.execute(sql, (insertdata))
         # connection is not autocommit by default. So you must commit to save
@@ -106,6 +107,8 @@ def balik_notif(insertdata):
                                  user='root',
                                  password='root',
                                  db='face_recognition',
+                                 unix_socket="/var/run/mysqld/mysqld.sock",
+                                 port=3306,
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
@@ -132,7 +135,6 @@ def balik_notif(insertdata):
                 id_tele= id_teles.get('id_telegram')
                 poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                 send_message(text,id_tele,poto)
-                time.sleep(5)
 
             sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
             cursor.execute(sql, (insertdata))

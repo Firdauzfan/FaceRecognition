@@ -23,6 +23,8 @@ def data(insertdata,kamera):
                                  user='root',
                                  password='root',
                                  db='face_recognition',
+                                 unix_socket="/var/run/mysqld/mysqld.sock",
+                                 port=3306,
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
@@ -38,9 +40,17 @@ def data(insertdata,kamera):
             if checking.get('ceknama')<1:
                 ts = time.time()
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-                sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`) VALUES (%s,%s,%s) "
-                cursor.execute(sql, (insertdata,timestamp,kamera))
 
+                ceksql= "SELECT `divisi` FROM `employee` WHERE nama_pegawai=%s"
+                cursor.execute(ceksql, (insertdata))
+                checking = cursor.fetchone()
+
+                if checking.get('divisi')=='IT' and kamera=='kamera 1':
+                    sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`aktif_notif`) VALUES (%s,%s,%s,'1') "
+                    cursor.execute(sql, (insertdata,timestamp,kamera))
+                else:
+                    sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`aktif_notif`) VALUES (%s,%s,%s,'0') "
+                    cursor.execute(sql, (insertdata,timestamp,kamera))
 
 
         # connection is not autocommit by default. So you must commit to save
@@ -56,6 +66,8 @@ def datang(insertdata,kamera,status,frame):
                                  user='root',
                                  password='root',
                                  db='face_recognition',
+                                 unix_socket="/var/run/mysqld/mysqld.sock",
+                                 port=3306,
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
@@ -82,6 +94,14 @@ def datang(insertdata,kamera,status,frame):
                 cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0','1'))
                 os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
 
+                selisih_wkt="SELECT (TIME_TO_SEC(waktu_masuk) - TIME_TO_SEC('08:30:00'))/60 AS selisih_waktu FROM `face_absensi` WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+                cursor.execute(selisih_wkt, (insertdata))
+                selisihwaktu = cursor.fetchone()
+                data_selisih=selisihwaktu.get('selisih_waktu')
+
+                updateselisih = "UPDATE `face_absensi` SET `selisih_waktu`='%s' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+                cursor.execute(updateselisih, (data_selisih,insertdata))
+
                 warning1= dataemp.get('warning1')
                 warning2= dataemp.get('warning2')
                 warning3= dataemp.get('warning3')
@@ -95,8 +115,12 @@ def datang(insertdata,kamera,status,frame):
                     ceksqlterlambat= "SELECT COUNT(nama_pegawai) AS ceknama FROM `face_absensi` WHERE nama_pegawai=%s AND aktif_terlambat=1"
                     cursor.execute(ceksqlterlambat, (insertdata))
                     checkingterlambat = cursor.fetchone()
-                    #print(checking)
-                    if checkingterlambat.get('ceknama')==5:
+
+                    ceksqlwaktutelat="SELECT SUM(selisih_waktu) AS waktutelat FROM `face_absensi` WHERE nama_pegawai=%s AND MONTH(waktu_masuk)=MONTH(CURDATE())"
+                    cursor.execute(ceksqlwaktutelat, (insertdata))
+                    checkingwaktutelat = cursor.fetchone()
+
+                    if checkingterlambat.get('ceknama')==6 or checkingwaktutelat.get('waktutelat')>30:
                         if warning1==None and warning2==None and warning3==None:
                             warn='Surat Peringatan 1'
                             updatewarning= "UPDATE `employee` SET `warning1`=%s WHERE nama_pegawai=%s"
@@ -131,6 +155,8 @@ def balik(insertdata,kamera,frame):
                                  user='root',
                                  password='root',
                                  db='face_recognition',
+                                 unix_socket="/var/run/mysqld/mysqld.sock",
+                                 port=3306,
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
@@ -158,6 +184,9 @@ def balik(insertdata,kamera,frame):
         connection.commit()
         return True
 
+    except:
+        pass
+
     finally:
         connection.close()
 
@@ -166,6 +195,8 @@ def checking(insertdata,kamera):
                                  user='root',
                                  password='root',
                                  db='face_recognition',
+                                 unix_socket="/var/run/mysqld/mysqld.sock",
+                                 port=3306,
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
@@ -173,16 +204,19 @@ def checking(insertdata,kamera):
     try:
         with connection.cursor() as cursor:
             # Create a new record
-            ceksql= "SELECT `divisi` FROM `employee` WHERE nama_pegawai=%s"
+            ceksql= "SELECT `divisi`,`no_hp` FROM `employee` WHERE nama_pegawai=%s"
             cursor.execute(ceksql, (insertdata))
             checking = cursor.fetchone()
+
+            no_hp=checking.get('no_hp')
             #print(checking.get('divisi'))
             if checking.get('divisi')=='IT' and kamera=='kamera 1':
+                time.sleep(2)
                 notify = Notify()
                 notify.send('%s Memasuki Ruangan Terlarang' %insertdata)
-                text = '%s , Memasuki Ruangan Terlarang' %insertdata
+                text = '%s , Memasuki Ruangan Terlarang dengan nomor hp %s' %(insertdata,no_hp)
                 id_tele= '205017793'
-                send_message(text, id_tele)
+                send_message_kemananan(text, id_tele)
 
 
         # connection is not autocommit by default. So you must commit to save

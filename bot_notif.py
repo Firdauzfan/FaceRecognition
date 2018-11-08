@@ -9,7 +9,13 @@ TOKEN = "625701624:AAGvxucdxeUhSb8Cj5qFuYt0Ppf9vg4Ua5U"
 bot = telebot.TeleBot(TOKEN)
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 
+TOKEN2 = "784407284:AAGLb28Y_pwIos-XPYsLGGPjoEtrI0YyXTk"
+bot2 = telebot.TeleBot(TOKEN2)
+URL2 = "https://api.telegram.org/bot{}/".format(TOKEN2)
+
 def send_message(text,chat_id,poto):
     bot.send_photo(chat_id,poto)
     bot.send_message(chat_id,text)
-    
+
+def send_message_kemananan(text,chat_id):
+    bot2.send_message(chat_id,text)

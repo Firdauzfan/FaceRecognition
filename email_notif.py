@@ -87,7 +87,7 @@ def main_email_terlambat(insertdata,status,timestamp,poto,no_hp,warn):
 Dear %s,
 
 Kepada Human Resource Development,
-kami memberitahukan bahwa karyawan dengan nama %s dan no hp = %s sudah terlambat sebanyak 3 kali sehingga perlu diberikan %s,
+kami memberitahukan bahwa karyawan dengan nama %s dan no hp = %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s,
 Hari ini datang %s pada tanggal dan pukul %s .
 
 Terima kasih.
