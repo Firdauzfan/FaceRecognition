@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 08, 2018 at 03:23 PM
+-- Generation Time: Nov 08, 2018 at 05:11 PM
 -- Server version: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -44,15 +44,15 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `id_pegawai`, `id_telegram`, `nama_pegawai`, `email`, `no_hp`, `divisi`, `warning1`, `warning2`, `warning3`) VALUES
-(1, 12345, 205017793, 'Firdauz Fanani', 'firdauzfanani@gmail.com', '081567920578', 'IT', 'Surat Peringatan 1', 'Coaching By HRD', 'Penalty Sesuai Kesepakatan'),
-(2, 12346, 668662889, 'Riyadi Agung Suharto', '0', '0817737727', 'IT', 'Surat Peringatan 1', NULL, NULL),
+(1, 12345, 205017793, 'Firdauz Fanani', 'firdauzfanani@gmail.com', '081567920578', 'IT', NULL, NULL, NULL),
+(2, 12346, 668662889, 'Riyadi Agung Suharto', '0', '0817737727', 'IT', NULL, NULL, NULL),
 (3, 12347, 750150427, 'Teoderikus Ferdian', '0', '087839659675', 'Marketing', NULL, NULL, NULL),
 (4, 12348, 376571445, 'Wahyudi Prasatia', '0', '085363236007', 'Marketing', NULL, NULL, NULL),
 (5, 12349, 692286966, 'Muhammad Reiza Syaifullah', 'firdauz.fanani@mail.ugm.ac.id', '085274521796', 'HRD', NULL, NULL, NULL),
 (6, 12340, 644107942, 'Liza A Barezi', 'lizabarezi@gspe.co.id', '085725180999', 'HRD', NULL, NULL, NULL),
 (7, 12341, 764143199, 'Vicky Yuliandi Siahaan', '0', '08128552527', 'IT', NULL, NULL, NULL),
 (8, 12342, 723606683, 'Faza Ghassani', '0', '089676824961', 'Produksi', NULL, NULL, NULL),
-(9, 12343, 252488349, 'Muhammad Yasir Abdulazis', '0', '081703078960', 'Procurement', 'Surat Peringatan 1', 'Coaching By HRD', NULL),
+(9, 12343, 252488349, 'Muhammad Yasir Abdulazis', '0', '081703078960', 'Procurement', NULL, NULL, NULL),
 (10, 12350, 757158209, 'Dwi Prasetyo', '0', '085224666426', 'Procurement', NULL, NULL, NULL),
 (11, 12351, 670747420, 'Imam Sulton', '0', '081917558038', 'Security', NULL, NULL, NULL),
 (12, 12354, 788061070, 'Abdul Rohman', '0', '085795735556', 'Resepsionis', NULL, NULL, NULL),
@@ -93,7 +93,7 @@ INSERT INTO `face_absensi` (`id`, `employee_id`, `nama_pegawai`, `waktu_masuk`, 
 (7, 12350, 'Dwi Prasetyo', '2018-10-31 08:22:43', '2018-11-02 18:02:02', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (8, 12341, 'Vicky Yuliandi Siahaan', '2018-10-31 08:23:18', '2018-11-01 17:48:33', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (9, 12349, 'Muhammad Reiza Syaifullah', '2018-10-31 08:30:35', '2018-11-02 17:47:51', 0, 'kamera 1', 'Terlambat', 'OUT', 1, 0),
-(10, 12340, 'Liza A Barezi', '2018-10-31 08:32:00', '2018-11-02 17:36:36', 0, 'kamera 1', 'Terlambat', 'OUT', 1, 0),
+(10, 12340, 'Liza A Barezi', '2018-10-31 08:32:00', '2018-11-02 17:36:36', 0, 'kamera 1', 'Terlambat', 'OUT', 0, 0),
 (11, 12351, 'Imam Sulton', '2018-10-31 08:33:15', '2018-10-31 18:05:42', 0, 'kamera 1', 'Terlambat', 'OUT', 1, 0),
 (12, 12346, 'Riyadi Agung Suharto', '2018-10-31 11:24:36', '2018-11-05 18:17:45', 0, 'kamera 1', 'Terlambat', 'OUT', 0, 0),
 (13, 12349, 'Muhammad Reiza Syaifullah', '2018-11-01 08:59:57', '2018-11-02 17:47:51', 0, 'kamera 1', 'Terlambat', 'OUT', 1, 0),
@@ -136,7 +136,19 @@ INSERT INTO `face_absensi` (`id`, `employee_id`, `nama_pegawai`, `waktu_masuk`, 
 (50, 12341, 'Vicky Yuliandi Siahaan', '2018-11-06 08:19:34', '2018-11-05 17:31:54', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (51, 12342, 'Faza Ghassani', '2018-11-06 08:24:07', '2018-11-06 17:58:41', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (52, 12340, 'Liza A Barezi', '2018-11-01 08:13:10', '2018-11-06 17:58:41', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
-(53, 12351, 'Imam Sulton', '2018-11-06 08:29:15', '2018-11-06 17:58:41', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0);
+(53, 12351, 'Imam Sulton', '2018-11-06 08:29:15', '2018-11-06 17:58:41', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(54, 12354, 'Abdul Rohman', '2018-11-08 07:25:39', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(55, 12343, 'Muhammad Yasir Abdulazis', '2018-11-08 08:12:58', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(56, 12347, 'Teoderikus Ferdian', '2018-11-08 08:17:59', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(57, 12348, 'Wahyudi Prasatia', '2018-11-08 08:20:26', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(58, 12342, 'Faza Ghassani', '2018-11-08 08:21:01', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(59, 12350, 'Dwi Prasetyo', '2018-11-08 08:22:43', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(60, 12341, 'Vicky Yuliandi Siahaan', '2018-11-08 08:23:18', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(61, 12349, 'Muhammad Reiza Syaifullah', '2018-11-08 08:30:35', NULL, 0, 'kamera 1', 'Terlambat', 'IN', 1, 0),
+(62, 12340, 'Liza A Barezi', '2018-11-08 08:32:00', NULL, 0, 'kamera 1', 'Terlambat', 'IN', 0, 0),
+(63, 12351, 'Imam Sulton', '2018-11-08 08:33:15', NULL, 0, 'kamera 1', 'Terlambat', 'IN', 1, 0),
+(64, 12346, 'Riyadi Agung Suharto', '2018-11-08 11:24:36', NULL, 0, 'kamera 1', 'Terlambat', 'IN', 0, 0),
+(65, 12345, 'Firdauz Fanani', '2018-11-08 16:44:01', NULL, 494.017, 'kamera 1', 'Terlambat', 'IN', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -317,11 +329,37 @@ INSERT INTO `face_keamanan` (`id`, `nama`, `waktu`, `kamera`, `aktif_notif`) VAL
 (158, 'Firdauz Fanani', '2018-11-08 15:18:59', 'kamera 1', 0),
 (159, 'Firdauz Fanani', '2018-11-08 15:19:00', 'kamera 1', 0),
 (160, 'Firdauz Fanani', '2018-11-08 15:21:32', 'kamera 1', 0),
-(161, 'Firdauz Fanani', '2018-11-08 15:22:00', 'kamera 1', 0);
+(161, 'Firdauz Fanani', '2018-11-08 15:22:00', 'kamera 1', 0),
+(162, 'Faza Ghassani', '2018-11-08 16:01:19', 'kamera 1', 0),
+(163, 'Firdauz Fanani', '2018-11-08 16:06:17', 'kamera 1', 0),
+(164, 'Firdauz Fanani', '2018-11-08 16:10:05', 'kamera 1', 0),
+(165, 'Riyadi Agung Suharto', '2018-11-08 16:12:11', 'kamera 1', 0),
+(166, 'Riyadi Agung Suharto', '2018-11-08 16:14:00', 'kamera 1', 0),
+(167, 'Firdauz Fanani', '2018-11-08 16:16:50', 'kamera 1', 0),
+(168, 'Firdauz Fanani', '2018-11-08 16:17:00', 'kamera 1', 0),
+(169, 'Teoderikus Ferdian', '2018-11-08 16:28:24', 'kamera 1', 0),
+(170, 'Liza A Barezi', '2018-11-08 16:30:30', 'kamera 1', 0),
+(171, 'Firdauz Fanani', '2018-11-08 16:44:01', 'kamera 1', 0),
+(172, 'Muhammad Yasir Abdulazis', '2018-11-08 16:51:39', 'kamera 1', 0),
+(173, 'Muhammad Yasir Abdulazis', '2018-11-08 16:52:42', 'kamera 1', 0),
+(174, 'Abdul Rohman', '2018-11-08 16:54:03', 'kamera 1', 0),
+(175, 'Muhammad Yasir Abdulazis', '2018-11-08 16:57:31', 'kamera 1', 0),
+(176, 'Firdauz Fanani', '2018-11-08 16:57:57', 'kamera 1', 0),
+(177, 'Firdauz Fanani', '2018-11-08 16:58:00', 'kamera 1', 0),
+(178, 'Firdauz Fanani', '2018-11-08 17:04:21', 'kamera 1', 0),
+(179, 'Muhammad Yasir Abdulazis', '2018-11-08 17:05:39', 'kamera 1', 0),
+(180, 'Firdauz Fanani', '2018-11-08 17:07:49', 'kamera 1', 0),
+(181, 'Firdauz Fanani', '2018-11-08 17:08:01', 'kamera 1', 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `face_absensi`
@@ -343,12 +381,12 @@ ALTER TABLE `face_keamanan`
 -- AUTO_INCREMENT for table `face_absensi`
 --
 ALTER TABLE `face_absensi`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `face_keamanan`
 --
 ALTER TABLE `face_keamanan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
