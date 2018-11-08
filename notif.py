@@ -53,7 +53,7 @@ def notif_datang(insertdata,status):
 
                 if status=='Terlambat':
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,status,waktu)
-                    id_tele_terlambat='668662889'
+                    id_tele_terlambat='205017793'
                     poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                     send_message(text_terlambat,id_tele_terlambat,poto)
                     main_email(insertdata,status,waktu,poto,no_hp)

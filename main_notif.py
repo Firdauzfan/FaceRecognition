@@ -81,10 +81,12 @@ def keamanan_notif():
                 checking = cursor.fetchone()
                 print(checking.get('ceknama'))
                 if checking.get('ceknama')>=1:
-                    ceknama= "SELECT nama FROM `face_keamanan` WHERE DATE(`waktu`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
+                    ceknama= "SELECT nama,waktu FROM `face_keamanan` WHERE DATE(`waktu`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
                     cursor.execute(ceknama)
                     checkingnama = cursor.fetchone()
                     checkingjeneng=checkingnama.get('nama')
+
+                    waktudtc=checkingnama.get('waktu')
 
                     ceksqli= "SELECT `divisi`,`no_hp` FROM `employee` WHERE nama_pegawai=%s"
                     cursor.execute(ceksqli, (checkingjeneng))
@@ -99,8 +101,8 @@ def keamanan_notif():
                     id_tele= '205017793'
                     send_message_kemananan(text, id_tele)
 
-                    sql = "UPDATE `face_keamanan` SET `aktif_notif`='0' WHERE nama=%s AND DATE(`waktu`) = DATE(CURDATE())"
-                    cursor.execute(sql, (checkingjeneng))
+                    sql = "UPDATE `face_keamanan` SET `aktif_notif`='0' WHERE nama=%s AND waktu =%s"
+                    cursor.execute(sql, (checkingjeneng,waktudtc))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
