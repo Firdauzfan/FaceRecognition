@@ -10,7 +10,7 @@ import datetime
 import main_facerec
 import main_facerec2
 import main_facerec3
-import os
+import os,subprocess
 from bot_notif import *
 from email_notif import *
 from notify_run import Notify
@@ -51,6 +51,7 @@ def data(insertdata,kamera,frame):
 
                     sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`aktif_notif`) VALUES (%s,%s,%s,'1') "
                     cursor.execute(sql, (insertdata,timestamp,kamera))
+                    process = subprocess.Popen("python3 notif_keamanan.py", shell=True)
                 else:
                     sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`aktif_notif`) VALUES (%s,%s,%s,'0') "
                     cursor.execute(sql, (insertdata,timestamp,kamera))
@@ -146,6 +147,9 @@ def datang(insertdata,kamera,status,frame):
 
                             updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
                             cursor.execute(updateterlambat, (insertdata))
+                process = subprocess.Popen("python3 notif_absensi.py", shell=True)
+            sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+            cursor.execute(sql, (insertdata))
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         connection.commit()
@@ -182,7 +186,10 @@ def balik(insertdata,kamera,frame):
                 sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                 cursor.execute(sql, (timestamp,state,insertdata))
                 os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
+                process = subprocess.Popen("python3 notif_absensi.py", shell=True)
 
+            sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+            cursor.execute(sql, (insertdata))
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         connection.commit()

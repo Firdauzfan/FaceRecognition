@@ -53,7 +53,7 @@ def notif_datang(insertdata,status):
 
                 if status=='Terlambat':
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,status,waktu)
-                    id_tele_terlambat='668662889'
+                    id_tele_terlambat='205017793'
                     poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                     send_message(text_terlambat,id_tele_terlambat,poto)
                     main_email(insertdata,status,waktu,poto,no_hp)
@@ -72,7 +72,7 @@ def notif_datang(insertdata,status):
                             warn='Surat Peringatan 1'
 
                             text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
-                            id_tele_terlambat='668662889'
+                            id_tele_terlambat='205017793'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
 
@@ -92,8 +92,6 @@ def notif_datang(insertdata,status):
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
 
-            sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
-            cursor.execute(sql, (insertdata))
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         connection.commit()
@@ -135,9 +133,6 @@ def balik_notif(insertdata):
                 id_tele= id_teles.get('id_telegram')
                 poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                 send_message(text,id_tele,poto)
-
-            sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
-            cursor.execute(sql, (insertdata))
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.

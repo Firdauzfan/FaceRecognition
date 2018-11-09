@@ -101,6 +101,7 @@ def camera_recog():
         if key == ord("q"):
             break
             vs.release() # cleanup the camera and close any open windows
+
 '''
 facerec_128D.txt Data Structure:
 {
