@@ -134,6 +134,8 @@ def balik_notif(insertdata):
                 poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                 send_message(text,id_tele,poto)
 
+                sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+                cursor.execute(sql, (insertdata))
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         connection.commit()

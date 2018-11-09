@@ -188,8 +188,6 @@ def balik(insertdata,kamera,frame):
                 os.system('spd-say "Goodbye %s ,Take care in your way"' %insertdata)
                 process = subprocess.Popen("python3 notif_absensi.py", shell=True)
 
-            sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
-            cursor.execute(sql, (insertdata))
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         connection.commit()

@@ -120,17 +120,27 @@ def camera_recog():
                     ts = time.time()
                     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
 
-                    cv2.rectangle(frame1,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
+                    cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
                     #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
-                    cv2.putText(frame1,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                    cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                     if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
-                        kamera="kamera 1"
+                        kamera="kamera 2"
                         #check=checking(recog_data[i][0],kamera)
                         #print(timestamp)
-                        insertdata= data(recog_data[i][0],kamera,frame1)
-                        #if recog_data[i][0]=='Firdauz_Fanani':
-                            #notify.send('%s Memasuki Ruangan Terlarang' %recog_data[i][0])
+                        if timestamp>'06:00:00' and timestamp<'08:45:00':
+                            status="Tepat Waktu"#
+                            insertdata= data(recog_data[i][0],kamera,frame)
+                            insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                        elif timestamp>'08:45:00' and timestamp<'17:30:00':
+                            status="Terlambat"
+                            insertdata= data(recog_data[i][0],kamera,frame)
+                            insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                        elif timestamp>'17:30:00' and timestamp<'23:59:00':
+                            insertdata= data(recog_data[i][0],kamera,frame)
+                            insertbalik= balik(recog_data[i][0],kamera,frame)
+                        else:
+                            insertdata= data(recog_data[i][0],kamera,frame)
 
             cv2.imshow("Frame1",frame1)
 
