@@ -77,8 +77,6 @@ def camera_recog():
 
                 if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
                     kamera="kamera 1"
-                    #check=checking(recog_data[i][0],kamera)
-                    #print(timestamp)
                     if timestamp>'06:00:00' and timestamp<'08:45:00':
                         status="Tepat Waktu"#
                         insertdata= data(recog_data[i][0],kamera,frame)
@@ -92,9 +90,6 @@ def camera_recog():
                         insertbalik= balik(recog_data[i][0],kamera,frame)
                     else:
                         insertdata= data(recog_data[i][0],kamera,frame)
-
-                    #if recog_data[i][0]=='Firdauz_Fanani':
-                        #notify.send('%s Memasuki Ruangan Terlarang' %recog_data[i][0])
 
         cv2.imshow("Frame",frame)
         key = cv2.waitKey(5) & 0xFF

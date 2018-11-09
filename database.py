@@ -117,7 +117,7 @@ def datang(insertdata,kamera,status,frame):
                     sql = "UPDATE `face_absensi` SET `aktif_terlambat`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                     cursor.execute(sql, (insertdata))
 
-                    ceksqlterlambat= "SELECT COUNT(nama_pegawai) AS ceknama FROM `face_absensi` WHERE nama_pegawai=%s AND aktif_terlambat=1"
+                    ceksqlterlambat= "SELECT COUNT(nama_pegawai) AS ceknama FROM `face_absensi` WHERE nama_pegawai=%s AND aktif_terlambat=1 AND MONTH(waktu_masuk)=MONTH(CURDATE())"
                     cursor.execute(ceksqlterlambat, (insertdata))
                     checkingterlambat = cursor.fetchone()
 
@@ -131,22 +131,22 @@ def datang(insertdata,kamera,status,frame):
                             updatewarning= "UPDATE `employee` SET `warning1`=%s WHERE nama_pegawai=%s"
                             cursor.execute(updatewarning, (warn,insertdata))
 
-                            updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
-                            cursor.execute(updateterlambat, (insertdata))
+                            # updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0', WHERE nama_pegawai=%s AND MONTH(waktu_masuk)=MONTH(CURDATE())"
+                            # cursor.execute(updateterlambat, (insertdata))
                         elif warning1 !=None and warning2==None and warning3 ==None:
                             warn='Coaching By HRD'
                             updatewarning= "UPDATE `employee` SET `warning2`=%s WHERE nama_pegawai=%s"
                             cursor.execute(updatewarning, (warn,insertdata))
 
-                            updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
-                            cursor.execute(updateterlambat, (insertdata))
+                            # updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s AND MONTH(waktu_masuk)=MONTH(CURDATE())"
+                            # cursor.execute(updateterlambat, (insertdata))
                         else:
                             warn='Penalty Sesuai Kesepakatan'
                             updatewarning= "UPDATE `employee` SET `warning3`=%s WHERE nama_pegawai=%s"
                             cursor.execute(updatewarning, (warn,insertdata))
 
-                            updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s"
-                            cursor.execute(updateterlambat, (insertdata))
+                            # updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s AND MONTH(waktu_masuk)=MONTH(CURDATE())"
+                            # cursor.execute(updateterlambat, (insertdata))
                 process = subprocess.Popen("python3 notif_absensi.py", shell=True)
             sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
             cursor.execute(sql, (insertdata))
