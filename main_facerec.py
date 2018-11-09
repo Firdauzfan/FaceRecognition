@@ -22,12 +22,6 @@ import imutils
 import datetime
 from notify_run import Notify
 
-
-# ------------ setting time in and time go home ------- #
-
-masuk = 08.50
-keluar = 17.50
-
 def main(args):
     mode = args.mode
     if(mode == "camera"):
@@ -50,8 +44,8 @@ def camera_recog():
     notify = Notify()
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
-    #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
+    #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/501")
     #vs = cv2.VideoCapture("rtsp://10.8.250.9:554/user=admin&password=56789E&channel=9&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")
@@ -85,19 +79,19 @@ def camera_recog():
                     kamera="kamera 1"
                     #check=checking(recog_data[i][0],kamera)
                     #print(timestamp)
-                    if timestamp>'06:00:00' and timestamp<'08:30:00':
+                    if timestamp>'06:00:00' and timestamp<'08:45:00':
                         status="Tepat Waktu"#
-                        insertdata= data(recog_data[i][0],kamera)
+                        insertdata= data(recog_data[i][0],kamera,frame)
                         insertdatang= datang(recog_data[i][0],kamera,status,frame)
-                    elif timestamp>'08:30:00' and timestamp<'17:30:00':
+                    elif timestamp>'08:45:00' and timestamp<'17:30:00':
                         status="Terlambat"
-                        insertdata= data(recog_data[i][0],kamera)
+                        insertdata= data(recog_data[i][0],kamera,frame)
                         insertdatang= datang(recog_data[i][0],kamera,status,frame)
                     elif timestamp>'17:30:00' and timestamp<'23:59:00':
-                        insertdata= data(recog_data[i][0],kamera)
+                        insertdata= data(recog_data[i][0],kamera,frame)
                         insertbalik= balik(recog_data[i][0],kamera,frame)
                     else:
-                        insertdata= data(recog_data[i][0],kamera)
+                        insertdata= data(recog_data[i][0],kamera,frame)
 
                     #if recog_data[i][0]=='Firdauz_Fanani':
                         #notify.send('%s Memasuki Ruangan Terlarang' %recog_data[i][0])

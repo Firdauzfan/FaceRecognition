@@ -48,23 +48,16 @@ def notif():
                     cursor.execute(ceksql)
                     checking = cursor.fetchone()
                     insertdata=checking.get('nama_pegawai')
-                    if timestamp>'06:00:00' and timestamp<'08:30:00':
+                    if timestamp>'06:00:00' and timestamp<'08:45:00':
                         status="Tepat Waktu"
                         notif=notif_datang(insertdata,status)
-                    elif timestamp>'08:30:00' and timestamp<'17:30:00':
+                    elif timestamp>'08:45:00' and timestamp<'17:30:00':
                         status="Terlambat"
                         notif=notif_datang(insertdata,status)
                     elif timestamp>'17:30:00' and timestamp<'23:59:00':
                         notif=balik_notif(insertdata)
-            # connection is not autocommit by default. So you must commit to save
-            # your changes.
-            connection.commit()
-
         except:
             pass
-
-        finally:
-            connection.close()
 
 def keamanan_notif():
     while True:
@@ -88,10 +81,10 @@ def keamanan_notif():
                 cursor.execute(ceknama)
                 checkingnama = cursor.fetchone()
                 checkingjeneng=checkingnama.get('nama')
+                checkingwaktu=checkingnama.get('waktu')
+                waktu='%s' %checkingwaktu
+
                 if checking.get('ceknama')>=1:
-                    sql = "UPDATE `face_keamanan` SET `aktif_notif`=0 WHERE nama=%s"
-                    cursor.execute(sql, (insertdata))
-                    
                     ceksqli= "SELECT `divisi`,`no_hp` FROM `employee` WHERE nama_pegawai=%s"
                     cursor.execute(ceksqli, (checkingjeneng))
                     checkingi = cursor.fetchone()
@@ -103,17 +96,17 @@ def keamanan_notif():
                     notify.send('%s Memasuki Ruangan Terlarang' %checkingjeneng)
                     text = '%s , dari Divisi %s dengan nomor hp %s Memasuki Ruangan Terlarang' %(checkingjeneng,divisi,no_hp)
                     id_tele= '668662889'
-                    send_message_kemananan(text, id_tele)
+                    poto = open('hasil_keamanan/'+ checkingjeneng + waktu + ".jpg" , 'rb')
+                    send_message_kemananan(text, id_tele, poto)
 
+                    sql = "UPDATE `face_keamanan` SET `aktif_notif`=0 WHERE nama=%s"
+                    cursor.execute(sql, (checkingjeneng))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
 
         except:
             pass
-
-        finally:
-            connection.close()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -12,6 +12,7 @@ from align_custom import AlignCustom
 from face_feature import FaceFeature
 from mtcnn_detect import MTCNNDetect
 from database import *
+from notif import *
 from tf_graph import FaceRecGraph
 import argparse
 import sys
@@ -20,12 +21,6 @@ import numpy as np
 import imutils
 import datetime
 from notify_run import Notify
-
-
-# ------------ setting time in and time go home ------- #
-
-masuk = 08.50
-keluar = 17.50
 
 def main(args):
     mode = args.mode
@@ -49,14 +44,15 @@ def camera_recog():
     notify = Notify()
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
-    #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
+    vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/501")
-    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/601")
+    #vs = cv2.VideoCapture("rtsp://10.8.250.9:554/user=admin&password=56789E&channel=9&stream=0.sdp?")
+    #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")
 
     while True:
         _,frame = vs.read();
-        #frame  = imutils.resize(frame, width = 640)
+        #frame  = imutils.resize(frame, width = 1400)
         #u can certainly add a roi here but for the sake of a demo i'll just leave it as simple as this
         rects, landmarks = face_detect.detect_face(frame,30);#min face size is set to 80x80
         aligns = []
@@ -83,27 +79,28 @@ def camera_recog():
                     kamera="kamera 1"
                     #check=checking(recog_data[i][0],kamera)
                     #print(timestamp)
-                    if timestamp>'06:00:00' and timestamp<'08:30:00':
-                        status="Tepat Waktu"
-                        insertdata= data(recog_data[i][0],kamera)
+                    if timestamp>'06:00:00' and timestamp<'08:45:00':
+                        status="Tepat Waktu"#
+                        insertdata= data(recog_data[i][0],kamera,frame)
                         insertdatang= datang(recog_data[i][0],kamera,status,frame)
-                    elif timestamp>'08:30:00' and timestamp<'17:30:00':
+                    elif timestamp>'08:45:00' and timestamp<'17:30:00':
                         status="Terlambat"
-                        insertdata= data(recog_data[i][0],kamera)
+                        insertdata= data(recog_data[i][0],kamera,frame)
                         insertdatang= datang(recog_data[i][0],kamera,status,frame)
                     elif timestamp>'17:30:00' and timestamp<'23:59:00':
-                        insertdata= data(recog_data[i][0],kamera)
+                        insertdata= data(recog_data[i][0],kamera,frame)
                         insertbalik= balik(recog_data[i][0],kamera,frame)
                     else:
-                        insertdata= data(recog_data[i][0],kamera)
+                        insertdata= data(recog_data[i][0],kamera,frame)
 
                     #if recog_data[i][0]=='Firdauz_Fanani':
                         #notify.send('%s Memasuki Ruangan Terlarang' %recog_data[i][0])
 
         cv2.imshow("Frame",frame)
-        key = cv2.waitKey(1) & 0xFF
+        key = cv2.waitKey(5) & 0xFF
         if key == ord("q"):
             break
+            vs.release() # cleanup the camera and close any open windows
 '''
 facerec_128D.txt Data Structure:
 {

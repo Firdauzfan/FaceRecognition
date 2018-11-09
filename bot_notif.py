@@ -17,5 +17,6 @@ def send_message(text,chat_id,poto):
     bot.send_photo(chat_id,poto)
     bot.send_message(chat_id,text)
 
-def send_message_kemananan(text,chat_id):
+def send_message_kemananan(text,chat_id,poto):
+    bot2.send_photo(chat_id,poto)
     bot2.send_message(chat_id,text)

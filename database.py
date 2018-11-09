@@ -18,7 +18,7 @@ import cv2
 import smtplib
 
 # Connect to the database
-def data(insertdata,kamera):
+def data(insertdata,kamera,frame):
     connection = pymysql.connect(host='localhost',
                                  user='root',
                                  password='root',
@@ -46,6 +46,9 @@ def data(insertdata,kamera):
                 checking = cursor.fetchone()
 
                 if checking.get('divisi')=='IT' and kamera=='kamera 1':
+                    namefile = "hasil_keamanan/"+ insertdata + timestamp + ".jpg"
+                    cv2.imwrite(namefile, frame)
+
                     sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`aktif_notif`) VALUES (%s,%s,%s,'1') "
                     cursor.execute(sql, (insertdata,timestamp,kamera))
                 else:
@@ -94,7 +97,7 @@ def datang(insertdata,kamera,status,frame):
                 cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0','1','0'))
                 os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
 
-                selisih_wkt="SELECT (TIME_TO_SEC(waktu_masuk) - TIME_TO_SEC('8:30:00'))/60 AS selisih_waktu FROM `face_absensi` WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+                selisih_wkt="SELECT (TIME_TO_SEC(waktu_masuk) - TIME_TO_SEC('8:45:00'))/60 AS selisih_waktu FROM `face_absensi` WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                 cursor.execute(selisih_wkt, (insertdata))
                 selisihwaktu = cursor.fetchone()
                 data_selisih=selisihwaktu.get('selisih_waktu')
