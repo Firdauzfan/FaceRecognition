@@ -17,6 +17,8 @@ import argparse
 import sys
 from notify_run import Notify
 
+os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
+
 def notif():
         try:
             connection = pymysql.connect(host='localhost',

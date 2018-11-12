@@ -8,6 +8,8 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 import os
 
+os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
+
 MY_ADDRESS = 'gspeintercon@gmail.com'
 PASSWORD = 'gspegspe'
 
