@@ -80,7 +80,7 @@ def camera_recog():
                     cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                     if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
-                        kamera="kamera 2"
+                        kamera="kamera 1"
                         #check=checking(recog_data[i][0],kamera)
                         #print(timestamp)
                         if timestamp>'06:00:00' and timestamp<'08:45:00':
