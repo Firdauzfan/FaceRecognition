@@ -91,7 +91,8 @@ def notif_datang(insertdata,status):
                             id_tele_terlambat='668662889'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
-
+                sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
+                cursor.execute(sql, (insertdata))
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         connection.commit()
