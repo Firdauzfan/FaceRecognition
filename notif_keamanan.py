@@ -24,7 +24,7 @@ def keamanan_notif():
             connection = pymysql.connect(host='localhost',
                                          user='root',
                                          password='root',
-                                         db='face_recognition',
+                                         db='absensi',
                                          unix_socket="/var/run/mysqld/mysqld.sock",
                                          port=3306,
                                          charset='utf8mb4',
