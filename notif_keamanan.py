@@ -69,9 +69,3 @@ def keamanan_notif():
             connection.close()
 
 keamanan_notif()
-
-# if __name__ == '__main__':
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument("--mode", type=str, help="Run notif", default="notif")
-#     args = parser.parse_args(sys.argv[1:]);
-#     main(args);
