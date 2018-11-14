@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 13, 2018 at 09:17 AM
+-- Generation Time: Nov 14, 2018 at 04:57 PM
 -- Server version: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -201,16 +201,25 @@ INSERT INTO `face_absensi` (`id`, `employee_id`, `nama_pegawai`, `waktu_masuk`, 
 (87, 12350, 'Dwi Prasetyo', '2018-11-12 08:39:04', '2018-11-12 18:17:04', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (88, 12343, 'Muhammad Yasir Abdulazis', '2018-11-12 08:43:34', '2018-11-12 17:41:08', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (89, 12346, 'Riyadi Agung Suharto', '2018-11-12 12:41:38', '2018-11-12 17:41:08', 236.633, 'kamera 1', 'Terlambat', 'OUT', 1, 0),
-(90, 12345, 'Firdauz Fanani', '2018-11-13 06:31:55', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(91, 12349, 'Muhammad Reiza Syaifullah', '2018-11-13 06:32:00', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(92, 12354, 'Abdul Rohman', '2018-11-13 06:53:08', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(93, 12340, 'Liza A Barezi', '2018-11-13 08:14:23', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(94, 12347, 'Teoderikus Ferdian', '2018-11-13 08:15:37', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(95, 12348, 'Wahyudi Prasatia', '2018-11-13 08:15:37', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(96, 12351, 'Imam Sulthon', '2018-11-13 08:21:17', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(97, 12342, 'Faza Ghassani', '2018-11-13 08:26:39', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(98, 12343, 'Muhammad Yasir Abdulazis', '2018-11-13 08:27:04', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(99, 12350, 'Dwi Prasetyo', '2018-11-13 08:31:09', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0);
+(90, 12345, 'Firdauz Fanani', '2018-11-13 06:31:55', '2018-11-13 17:49:09', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(91, 12349, 'Muhammad Reiza Syaifullah', '2018-11-13 06:32:00', '2018-11-13 18:23:08', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(92, 12354, 'Abdul Rohman', '2018-11-13 06:53:08', '2018-11-13 18:13:48', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(93, 12340, 'Liza A Barezi', '2018-11-13 08:14:23', '2018-11-13 17:54:50', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(94, 12347, 'Teoderikus Ferdian', '2018-11-13 08:15:37', '2018-11-13 17:51:06', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(95, 12348, 'Wahyudi Prasatia', '2018-11-13 08:15:37', '2018-11-13 17:51:35', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(96, 12351, 'Imam Sulthon', '2018-11-13 08:21:17', '2018-11-13 17:55:36', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(97, 12342, 'Faza Ghassani', '2018-11-13 08:26:39', '2018-11-13 17:55:09', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(98, 12343, 'Muhammad Yasir Abdulazis', '2018-11-13 08:27:04', '2018-11-13 17:45:27', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(99, 12350, 'Dwi Prasetyo', '2018-11-13 08:31:09', '2018-11-13 18:03:58', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(100, 12345, 'Firdauz Fanani', '2018-11-14 06:26:06', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(101, 12349, 'Muhammad Reiza Syaifullah', '2018-11-14 06:26:50', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(102, 12351, 'Imam Sulthon', '2018-11-14 08:17:52', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(103, 12343, 'Muhammad Yasir Abdulazis', '2018-11-14 08:18:53', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(104, 12354, 'Abdul Rohman', '2018-11-14 08:19:13', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(105, 12340, 'Liza A Barezi', '2018-11-14 08:25:24', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(106, 12342, 'Faza Ghassani', '2018-11-14 08:25:34', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(107, 12347, 'Teoderikus Ferdian', '2018-11-14 08:25:59', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(108, 12350, 'Dwi Prasetyo', '2018-11-14 08:35:21', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -599,7 +608,56 @@ INSERT INTO `face_keamanan` (`id`, `nama`, `waktu`, `kamera`, `aktif_notif`) VAL
 (366, 'Faza Ghassani', '2018-11-13 08:26:39', 'kamera 1', 0),
 (367, 'Muhammad Yasir Abdulazis', '2018-11-13 08:27:04', 'kamera 1', 0),
 (368, 'Dwi Prasetyo', '2018-11-13 08:31:09', 'kamera 1', 0),
-(369, 'Teoderikus Ferdian', '2018-11-13 08:31:11', 'kamera 1', 0);
+(369, 'Teoderikus Ferdian', '2018-11-13 08:31:11', 'kamera 1', 0),
+(370, 'Firdauz Fanani', '2018-11-13 09:40:26', 'kamera 1', 0),
+(371, 'Muhammad Yasir Abdulazis', '2018-11-13 09:43:24', 'kamera 1', 0),
+(372, 'Muhammad Yasir Abdulazis', '2018-11-13 17:45:27', 'kamera 1', 0),
+(373, 'Firdauz Fanani', '2018-11-13 17:49:09', 'kamera 1', 0),
+(374, 'Teoderikus Ferdian', '2018-11-13 17:51:06', 'kamera 1', 0),
+(375, 'Wahyudi Prasatia', '2018-11-13 17:51:35', 'kamera 1', 0),
+(376, 'Liza A Barezi', '2018-11-13 17:54:50', 'kamera 1', 0),
+(377, 'Liza A Barezi', '2018-11-13 17:55:00', 'kamera 1', 0),
+(378, 'Faza Ghassani', '2018-11-13 17:55:09', 'kamera 1', 0),
+(379, 'Imam Sulthon', '2018-11-13 17:55:36', 'kamera 1', 0),
+(380, 'Dwi Prasetyo', '2018-11-13 18:03:58', 'kamera 1', 0),
+(381, 'Dwi Prasetyo', '2018-11-13 18:04:02', 'kamera 1', 0),
+(382, 'Abdul Rohman', '2018-11-13 18:13:48', 'kamera 1', 0),
+(383, 'Muhammad Reiza Syaifullah', '2018-11-13 18:23:08', 'kamera 1', 0),
+(384, 'Muhammad Yasir Abdulazis', '2018-11-13 18:47:50', 'kamera 1', 0),
+(385, 'Dwi Prasetyo', '2018-11-13 19:00:20', 'kamera 1', 0),
+(386, 'Firdauz Fanani', '2018-11-14 06:26:05', 'kamera 1', 0),
+(387, 'Muhammad Reiza Syaifullah', '2018-11-14 06:26:50', 'kamera 1', 0),
+(388, 'Imam Sulthon', '2018-11-14 08:17:52', 'kamera 1', 0),
+(389, 'Imam Sulthon', '2018-11-14 08:18:04', 'kamera 1', 0),
+(390, 'Muhammad Yasir Abdulazis', '2018-11-14 08:18:53', 'kamera 1', 0),
+(391, 'Abdul Rohman', '2018-11-14 08:19:13', 'kamera 1', 0),
+(392, 'Liza A Barezi', '2018-11-14 08:25:24', 'kamera 1', 0),
+(393, 'Faza Ghassani', '2018-11-14 08:25:34', 'kamera 1', 0),
+(394, 'Teoderikus Ferdian', '2018-11-14 08:25:59', 'kamera 1', 0),
+(395, 'Teoderikus Ferdian', '2018-11-14 08:26:00', 'kamera 1', 0),
+(396, 'Muhammad Yasir Abdulazis', '2018-11-14 08:32:34', 'kamera 1', 0),
+(397, 'Muhammad Yasir Abdulazis', '2018-11-14 08:33:17', 'kamera 1', 0),
+(398, 'Muhammad Yasir Abdulazis', '2018-11-14 08:34:32', 'kamera 1', 0),
+(399, 'Dwi Prasetyo', '2018-11-14 08:35:21', 'kamera 1', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ijin_absensi`
+--
+
+CREATE TABLE `ijin_absensi` (
+  `id` bigint(20) NOT NULL,
+  `nama_pegawai` varchar(30) NOT NULL,
+  `ijin` varchar(30) NOT NULL,
+  `alasan_ijin` longtext NOT NULL,
+  `tanggal_ijin` date NOT NULL,
+  `waktu_buat_ijin` datetime NOT NULL,
+  `atasan` varchar(30) NOT NULL,
+  `app` varchar(30) DEFAULT NULL,
+  `app_by` varchar(30) DEFAULT NULL,
+  `alasan_app_dpp` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -624,6 +682,12 @@ ALTER TABLE `face_keamanan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ijin_absensi`
+--
+ALTER TABLE `ijin_absensi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -631,12 +695,17 @@ ALTER TABLE `face_keamanan`
 -- AUTO_INCREMENT for table `face_absensi`
 --
 ALTER TABLE `face_absensi`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 --
 -- AUTO_INCREMENT for table `face_keamanan`
 --
 ALTER TABLE `face_keamanan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=370;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=400;
+--
+-- AUTO_INCREMENT for table `ijin_absensi`
+--
+ALTER TABLE `ijin_absensi`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
