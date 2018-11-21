@@ -22,6 +22,8 @@ import imutils
 import datetime
 from notify_run import Notify
 
+nama_detected_count={}
+
 def main(args):
     mode = args.mode
     if(mode == "camera"):
@@ -44,12 +46,12 @@ def camera_recog():
     notify = Notify()
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
-    #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
+    #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/501")
     #vs = cv2.VideoCapture("rtsp://10.8.250.9:554/user=admin&password=56789E&channel=9&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")
-
+    #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=12&stream=0.sdp?")
     while True:
         _,frame = vs.read();
         #frame  = imutils.resize(frame, width = 1400)
@@ -66,7 +68,8 @@ def camera_recog():
                 print("Align face failed") #log
         if(len(aligns) > 0):
             features_arr = extract_feature.get_features(aligns)
-            recog_data = findPeople(features_arr,positions);
+            recog_data = findPeople(features_arr,positions)
+
             for (i,rect) in enumerate(rects):
                 ts = time.time()
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
@@ -76,20 +79,24 @@ def camera_recog():
                 cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                 if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
+                    nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
+                    print(nama_detected_count)
                     kamera="kamera 1"
-                    if timestamp>'06:00:00' and timestamp<'08:45:00':
-                        status="Tepat Waktu"#
-                        insertdata= data(recog_data[i][0],kamera,frame)
-                        insertdatang= datang(recog_data[i][0],kamera,status,frame)
-                    elif timestamp>'08:45:00' and timestamp<'17:30:00':
-                        status="Terlambat"
-                        insertdata= data(recog_data[i][0],kamera,frame)
-                        insertdatang= datang(recog_data[i][0],kamera,status,frame)
-                    elif timestamp>'17:30:00' and timestamp<'23:59:00':
-                        insertdata= data(recog_data[i][0],kamera,frame)
-                        insertbalik= balik(recog_data[i][0],kamera,frame)
-                    else:
-                        insertdata= data(recog_data[i][0],kamera,frame)
+                    if len(nama_detected_count[recog_data[i][0]])>5:
+                        nama_detected_count.clear()
+                        if timestamp>'06:00:00' and timestamp<'08:45:00':
+                            status="Tepat Waktu"#
+                            insertdata= data(recog_data[i][0],kamera,frame)
+                            insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                        elif timestamp>'08:45:00' and timestamp<'17:30:00':
+                            status="Terlambat"
+                            insertdata= data(recog_data[i][0],kamera,frame)
+                            insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                        elif timestamp>'17:30:00' and timestamp<'23:59:00':
+                            insertdata= data(recog_data[i][0],kamera,frame)
+                            insertbalik= balik(recog_data[i][0],kamera,frame)
+                        else:
+                            insertdata= data(recog_data[i][0],kamera,frame)
 
         cv2.imshow("Frame",frame)
         key = cv2.waitKey(5) & 0xFF
@@ -173,9 +180,6 @@ def create_manual_data():
     data_set[new_name] = person_features;
     f = open('./facerec_128D.txt', 'w');
     f.write(json.dumps(data_set))
-
-
-
 
 
 if __name__ == '__main__':

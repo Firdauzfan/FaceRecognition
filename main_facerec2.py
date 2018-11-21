@@ -22,6 +22,8 @@ import imutils
 import datetime
 from notify_run import Notify
 
+nama_detected_count={}
+
 def main(args):
     mode = args.mode
     if(mode == "camera"):
@@ -45,10 +47,12 @@ def camera_recog():
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
     vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
-    vs1 = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301")
+    vs1 = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    #vs1 = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301")
     #vs = cv2.VideoCapture("rtsp://10.8.250.9:554/user=admin&password=56789E&channel=9&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")
+    # vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")
+    # vs1 = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=12&stream=0.sdp?")
 
     while True:
         #_,frame = vs.read();
@@ -80,25 +84,24 @@ def camera_recog():
                     cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                     if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
+                        nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
+                        print(nama_detected_count)
                         kamera="kamera 1"
-                        #check=checking(recog_data[i][0],kamera)
-                        #print(timestamp)
-                        if timestamp>'06:00:00' and timestamp<'08:45:00':
-                            status="Tepat Waktu"#
-                            insertdata= data(recog_data[i][0],kamera,frame)
-                            insertdatang= datang(recog_data[i][0],kamera,status,frame)
-                        elif timestamp>'08:45:00' and timestamp<'17:30:00':
-                            status="Terlambat"
-                            insertdata= data(recog_data[i][0],kamera,frame)
-                            insertdatang= datang(recog_data[i][0],kamera,status,frame)
-                        elif timestamp>'17:30:00' and timestamp<'23:59:00':
-                            insertdata= data(recog_data[i][0],kamera,frame)
-                            insertbalik= balik(recog_data[i][0],kamera,frame)
-                        else:
-                            insertdata= data(recog_data[i][0],kamera,frame)
-
-                        #if recog_data[i][0]=='Firdauz_Fanani':
-                            #notify.send('%s Memasuki Ruangan Terlarang' %recog_data[i][0])
+                        if len(nama_detected_count[recog_data[i][0]])>5:
+                            nama_detected_count.clear()
+                            if timestamp>'06:00:00' and timestamp<'08:45:00':
+                                status="Tepat Waktu"#
+                                insertdata= data(recog_data[i][0],kamera,frame)
+                                insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                            elif timestamp>'08:45:00' and timestamp<'17:30:00':
+                                status="Terlambat"
+                                insertdata= data(recog_data[i][0],kamera,frame)
+                                insertdatang= datang(recog_data[i][0],kamera,status,frame)
+                            elif timestamp>'17:30:00' and timestamp<'23:59:00':
+                                insertdata= data(recog_data[i][0],kamera,frame)
+                                insertbalik= balik(recog_data[i][0],kamera,frame)
+                            else:
+                                insertdata= data(recog_data[i][0],kamera,frame)
 
             cv2.imshow("Frame",frame)
 
@@ -125,22 +128,24 @@ def camera_recog():
                     cv2.putText(frame1,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                     if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
-                        kamera="kamera 2"
-                        #check=checking(recog_data[i][0],kamera)
-                        #print(timestamp)
-                        if timestamp>'06:00:00' and timestamp<'08:45:00':
-                            status="Tepat Waktu"#
-                            insertdata= data(recog_data[i][0],kamera,frame1)
-                            insertdatang= datang(recog_data[i][0],kamera,status,frame1)
-                        elif timestamp>'08:45:00' and timestamp<'17:30:00':
-                            status="Terlambat"
-                            insertdata= data(recog_data[i][0],kamera,frame1)
-                            insertdatang= datang(recog_data[i][0],kamera,status,frame1)
-                        elif timestamp>'17:30:00' and timestamp<'23:59:00':
-                            insertdata= data(recog_data[i][0],kamera,frame1)
-                            insertbalik= balik(recog_data[i][0],kamera,frame1)
-                        else:
-                            insertdata= data(recog_data[i][0],kamera,frame1)
+                        nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
+                        print(nama_detected_count)
+                        kamera="kamera 1"
+                        if len(nama_detected_count[recog_data[i][0]])>5:
+                            nama_detected_count.clear()
+                            if timestamp>'06:00:00' and timestamp<'08:45:00':
+                                status="Tepat Waktu"#
+                                insertdata= data(recog_data[i][0],kamera,frame1)
+                                insertdatang= datang(recog_data[i][0],kamera,status,frame1)
+                            elif timestamp>'08:45:00' and timestamp<'17:30:00':
+                                status="Terlambat"
+                                insertdata= data(recog_data[i][0],kamera,frame1)
+                                insertdatang= datang(recog_data[i][0],kamera,status,frame1)
+                            elif timestamp>'17:30:00' and timestamp<'23:59:00':
+                                insertdata= data(recog_data[i][0],kamera,frame1)
+                                insertbalik= balik(recog_data[i][0],kamera,frame1)
+                            else:
+                                insertdata= data(recog_data[i][0],kamera,frame1)
 
             cv2.imshow("Frame1",frame1)
 
