@@ -87,7 +87,7 @@ def camera_recog():
                         nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
                         print(nama_detected_count)
                         kamera="kamera 1"
-                        if len(nama_detected_count[recog_data[i][0]])>5:
+                        if len(nama_detected_count[recog_data[i][0]])>=5:
                             nama_detected_count.clear()
                             if timestamp>'06:00:00' and timestamp<'08:45:00':
                                 status="Tepat Waktu"#
@@ -131,7 +131,7 @@ def camera_recog():
                         nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
                         print(nama_detected_count)
                         kamera="kamera 1"
-                        if len(nama_detected_count[recog_data[i][0]])>5:
+                        if len(nama_detected_count[recog_data[i][0]])>=5:
                             nama_detected_count.clear()
                             if timestamp>'06:00:00' and timestamp<'08:45:00':
                                 status="Tepat Waktu"#

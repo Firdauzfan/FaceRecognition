@@ -46,8 +46,8 @@ def camera_recog():
     notify = Notify()
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
-    vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
+    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/501")
     #vs = cv2.VideoCapture("rtsp://10.8.250.9:554/user=admin&password=56789E&channel=9&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")
@@ -78,11 +78,11 @@ def camera_recog():
                 #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
                 cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
-                if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
+                if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 90:
                     nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
                     print(nama_detected_count)
                     kamera="kamera 1"
-                    if len(nama_detected_count[recog_data[i][0]])>5:
+                    if len(nama_detected_count[recog_data[i][0]])>=5:
                         nama_detected_count.clear()
                         if timestamp>'06:00:00' and timestamp<'08:45:00':
                             status="Tepat Waktu"#
