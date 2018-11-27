@@ -55,7 +55,7 @@ def notif_datang(insertdata,status):
 
                 if status=='Terlambat':
                     text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s , Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,status,waktu)
-                    id_tele_terlambat='668662889'
+                    id_tele_terlambat='707062800'
                     poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                     send_message(text_terlambat,id_tele_terlambat,poto)
                     main_email(insertdata,status,waktu,poto,no_hp)
@@ -68,13 +68,13 @@ def notif_datang(insertdata,status):
                     cursor.execute(ceksqlwaktutelat, (insertdata))
                     checkingwaktutelat = cursor.fetchone()
                     #print(checking)
-                    if checkingterlambat.get('ceknama')==6 or checkingwaktutelat.get('waktutelat')>30:
+                    if checkingterlambat.get('ceknama')==6 or checkingwaktutelat.get('waktutelat')>40:
                         poto = open('hasil_absensi/'+ insertdata + waktu + ".jpg" , 'rb')
                         if warning1==None and warning2==None and warning3==None:
                             warn='Surat Peringatan 1'
 
                             text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
-                            id_tele_terlambat='668662889'
+                            id_tele_terlambat='707062800'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
 
@@ -82,7 +82,7 @@ def notif_datang(insertdata,status):
                             warn='Coaching By HRD'
 
                             text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
-                            id_tele_terlambat='668662889'
+                            id_tele_terlambat='707062800'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
 
@@ -90,7 +90,7 @@ def notif_datang(insertdata,status):
                             warn='Penalty Sesuai Kesepakatan'
 
                             text_terlambat = 'Kepada Human Resource Development, kami memberitahukan bahwa karyawan dengan nama %s dan no hp= %s sudah terlambat sebanyak 6 kali atau lebih dari 30 Menit sehingga perlu diberikan %s, Hari ini datang %s pada tanggal dan pukul %s' %(insertdata,no_hp,warn,status,waktu)
-                            id_tele_terlambat='668662889'
+                            id_tele_terlambat='707062800'
                             send_message(text_terlambat,id_tele_terlambat,poto)
                             main_email_terlambat(insertdata,status,waktu,poto,no_hp,warn)
                 sql = "UPDATE `face_absensi` SET `aktif_notif`='0' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"

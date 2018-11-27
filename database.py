@@ -125,7 +125,7 @@ def datang(insertdata,kamera,status,frame):
                     cursor.execute(ceksqlwaktutelat, (insertdata))
                     checkingwaktutelat = cursor.fetchone()
 
-                    if checkingterlambat.get('ceknama')==6 or checkingwaktutelat.get('waktutelat')>30:
+                    if checkingterlambat.get('ceknama')==6 or checkingwaktutelat.get('waktutelat')>40:
                         if warning1==None and warning2==None and warning3==None:
                             warn='Surat Peringatan 1'
                             updatewarning= "UPDATE `employee` SET `warning1`=%s WHERE nama_pegawai=%s"
