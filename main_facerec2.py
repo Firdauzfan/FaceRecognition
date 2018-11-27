@@ -83,7 +83,7 @@ def camera_recog():
                     #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
                     cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
-                    if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
+                    if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= :90
                         nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
                         print(nama_detected_count)
                         kamera="kamera 1"
@@ -127,7 +127,7 @@ def camera_recog():
                     #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
                     cv2.putText(frame1,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
-                    if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 85:
+                    if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 90:
                         nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
                         print(nama_detected_count)
                         kamera="kamera 1"
