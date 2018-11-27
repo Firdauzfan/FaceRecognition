@@ -23,6 +23,8 @@ import datetime
 from notify_run import Notify
 
 nama_detected_count={}
+nama_detected_count2={}
+nama_detected_count3={}
 
 def main(args):
     mode = args.mode
@@ -128,11 +130,11 @@ def camera_recog():
                     cv2.putText(frame1,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                     if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 90:
-                        nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
-                        print(nama_detected_count)
+                        nama_detected_count2.setdefault(recog_data[i][0], []).append(recog_data[i][0])
+                        print(nama_detected_count2)
                         kamera="kamera 2"
-                        if len(nama_detected_count[recog_data[i][0]])>=5:
-                            nama_detected_count.clear()
+                        if len(nama_detected_count2[recog_data[i][0]])>=5:
+                            nama_detected_count2.clear()
                             if timestamp>'06:00:00' and timestamp<'08:45:00':
                                 status="Tepat Waktu"#
                                 insertdata= data(recog_data[i][0],kamera,frame1)
@@ -172,11 +174,11 @@ def camera_recog():
                     cv2.putText(frame2,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                     if recog_data[i][0] != 'Unknown' and recog_data[i][1] >= 90:
-                        nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
-                        print(nama_detected_count)
+                        nama_detected_count3.setdefault(recog_data[i][0], []).append(recog_data[i][0])
+                        print(nama_detected_count3)
                         kamera="kamera 3"
-                        if len(nama_detected_count[recog_data[i][0]])>=5:
-                            nama_detected_count.clear()
+                        if len(nama_detected_count3[recog_data[i][0]])>=5:
+                            nama_detected_count3.clear()
                             if timestamp>'06:00:00' and timestamp<'08:45:00':
                                 status="Tepat Waktu"#
                                 insertdata= data(recog_data[i][0],kamera,frame2)
