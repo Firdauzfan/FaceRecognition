@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 27, 2018 at 09:29 AM
+-- Generation Time: Nov 30, 2018 at 02:49 PM
 -- Server version: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -84,10 +84,10 @@ INSERT INTO `employee` (`id`, `id_pegawai`, `id_telegram`, `nama_pegawai`, `emai
 (8, 12342, 723606683, 'Faza Ghassani', '0', '089676824961', 'Produksi', 'Manager Produksi', NULL, NULL, NULL),
 (9, 12343, 252488349, 'Muhammad Yasir Abdulazis', '0', '081703078960', 'Procurement', 'Staf', NULL, NULL, NULL),
 (10, 12350, 757158209, 'Dwi Prasetyo', '0', '085224666426', 'Procurement', 'Staf', NULL, NULL, NULL),
-(11, 12351, 670747420, 'Imam Sulthon', '0', '081917558038', 'Security', 'Staf', NULL, NULL, NULL),
+(11, 12351, 670747420, 'Imam Sulthon', '0', '081917558038', 'IT', 'Staf', NULL, NULL, NULL),
 (12, 12354, 788061070, 'Abdul Rohman', '0', '085795735556', 'Resepsionis', 'Staf', NULL, NULL, NULL),
 (13, 13451, 690578780, 'Gusli Arifin', 'gusli@gspe.com', '082283802775', 'Maintenance', 'Staf', NULL, NULL, NULL),
-(14, 12612, 276178321, 'Tonny Siregar', 'tonys@gspe.co.id', '081908999079', 'CRC', 'Manager CRC', NULL, NULL, NULL),
+(14, 12612, 276178321, 'Tonny Siregar', 'tonys@gspe.co.id', '081908999079', 'CRC', 'Manager CRC', 'Surat Peringatan 1', 'Coaching By HRD', NULL),
 (15, 12653, 798925359, 'Ahmad Kusaeri', 'ahmadk@gspe.co.id', '0851274123', 'CRC', 'Staf', NULL, NULL, NULL),
 (16, 41245, 690578780, 'Wahyu Hidayat', 'wahyu@gspe.co.id', '0861232331', 'Maintenance', 'Staf', NULL, NULL, NULL),
 (17, 13671, 707062800, 'Intan Liems', 'intan@gspe.co.id', '08161933863', 'HRD', 'Manager HRD', NULL, NULL, NULL);
@@ -280,17 +280,50 @@ INSERT INTO `face_absensi` (`id`, `employee_id`, `nama_pegawai`, `waktu_masuk`, 
 (161, 12348, 'Wahyudi Prasatia', '2018-11-23 08:21:39', '2018-11-23 17:42:05', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (162, 12340, 'Liza A Barezi', '2018-11-23 08:23:01', '2018-11-23 18:00:37', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
 (163, 12351, 'Imam Sulthon', '2018-11-23 08:30:58', '2018-11-23 18:00:37', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
-(164, 12345, 'Firdauz Fanani', '2018-11-27 06:33:31', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(165, 12354, 'Abdul Rohman', '2018-11-27 07:03:56', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(166, 12346, 'Riyadi Agung Suharto', '2018-11-27 08:08:02', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(167, 12341, 'Vicky Yuliandi Siahaan', '2018-11-27 08:13:15', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(168, 12347, 'Teoderikus Ferdian', '2018-11-27 08:15:44', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(169, 12340, 'Liza A Barezi', '2018-11-27 08:17:36', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(170, 12350, 'Dwi Prasetyo', '2018-11-27 08:20:38', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(171, 12342, 'Faza Ghassani', '2018-11-27 08:23:05', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(172, 12348, 'Wahyudi Prasatia', '2018-11-27 08:25:42', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(173, 12351, 'Imam Sulthon', '2018-11-27 08:31:56', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
-(174, 12343, 'Muhammad Yasir Abdulazis', '2018-11-27 08:47:46', NULL, 2.7667, 'kamera 1', 'Terlambat', 'IN', 1, 0);
+(164, 12345, 'Firdauz Fanani', '2018-11-27 06:33:31', '2018-11-27 18:16:02', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(165, 12354, 'Abdul Rohman', '2018-11-27 07:03:56', '2018-11-27 19:27:06', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(166, 12346, 'Riyadi Agung Suharto', '2018-11-27 08:08:02', '2018-11-27 19:27:06', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(167, 12341, 'Vicky Yuliandi Siahaan', '2018-11-27 08:13:15', '2018-11-27 17:52:04', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(168, 12347, 'Teoderikus Ferdian', '2018-11-27 08:15:44', '2018-11-27 18:14:32', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(169, 12340, 'Liza A Barezi', '2018-11-27 08:17:36', '2018-11-27 17:53:07', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(170, 12350, 'Dwi Prasetyo', '2018-11-27 08:20:38', '2018-11-27 19:10:51', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(171, 12342, 'Faza Ghassani', '2018-11-27 08:23:05', '2018-11-27 19:27:06', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(172, 12348, 'Wahyudi Prasatia', '2018-11-27 08:25:42', '2018-11-27 17:43:29', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(173, 12351, 'Imam Sulthon', '2018-11-27 08:31:56', '2018-11-27 18:30:10', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(174, 12343, 'Muhammad Yasir Abdulazis', '2018-11-27 08:47:46', '2018-11-27 19:27:06', 2.7667, 'kamera 1', 'Terlambat', 'OUT', 1, 0),
+(175, 12346, 'Riyadi Agung Suharto', '2018-11-28 08:26:08', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(176, 12354, 'Abdul Rohman', '2018-11-28 08:26:26', '2018-11-28 18:39:23', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(177, 12345, 'Firdauz Fanani', '2018-11-28 06:33:31', '2018-11-28 17:31:35', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(178, 12341, 'Vicky Yuliandi Siahaan', '2018-11-28 08:13:15', '2018-11-28 17:31:35', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(179, 12347, 'Teoderikus Ferdian', '2018-11-28 08:15:44', '2018-11-28 18:39:16', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(180, 12340, 'Liza A Barezi', '2018-11-28 08:17:36', '2018-11-28 18:39:16', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(181, 12350, 'Dwi Prasetyo', '2018-11-28 08:20:38', '2018-11-28 19:01:50', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(182, 12342, 'Faza Ghassani', '2018-11-28 08:23:05', '2018-11-28 17:51:34', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(183, 12348, 'Wahyudi Prasatia', '2018-11-28 08:25:42', '2018-11-28 20:38:32', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(184, 12351, 'Imam Sulthon', '2018-11-28 08:31:56', '2018-11-28 18:39:16', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(185, 12343, 'Muhammad Yasir Abdulazis', '2018-11-28 08:47:46', '2018-11-28 20:38:32', 0, 'kamera 1', 'Terlambat', 'OUT', 0, 0),
+(186, 12354, 'Abdul Rohman', '2018-11-29 07:12:31', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(187, 12346, 'Riyadi Agung Suharto', '2018-11-29 07:19:31', '2018-11-29 17:48:45', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(188, 12343, 'Muhammad Yasir Abdulazis', '2018-11-29 08:21:14', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(189, 12340, 'Liza A Barezi', '2018-11-29 08:21:23', '2018-11-29 17:54:02', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(190, 12348, 'Wahyudi Prasatia', '2018-11-29 08:23:55', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(191, 12341, 'Vicky Yuliandi Siahaan', '2018-11-29 08:25:39', '2018-11-29 17:50:30', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(192, 12350, 'Dwi Prasetyo', '2018-11-29 08:28:30', '2018-11-29 19:09:36', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(193, 12347, 'Teoderikus Ferdian', '2018-11-29 08:29:37', '2018-11-29 17:50:44', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(194, 12342, 'Faza Ghassani', '2018-11-29 08:39:38', '2018-11-29 17:48:47', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(195, 12345, 'Firdauz Fanani', '2018-11-29 06:33:31', '2018-11-29 18:07:46', 0, 'kamera 1', 'Tepat Waktu', 'OUT', 0, 0),
+(196, 12351, 'Imam Sulthon', '2018-11-29 08:47:42', '2018-11-29 17:54:44', 2.7, 'kamera 1', 'Terlambat', 'OUT', 1, 0),
+(197, 12345, 'Firdauz Fanani', '2018-11-30 06:09:55', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(198, 12346, 'Riyadi Agung Suharto', '2018-11-30 07:10:40', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(199, 12348, 'Wahyudi Prasatia', '2018-11-30 07:37:43', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(200, 13451, 'Gusli Arifin', '2018-11-30 07:43:36', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(201, 12347, 'Teoderikus Ferdian', '2018-11-30 08:03:00', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(202, 12341, 'Vicky Yuliandi Siahaan', '2018-11-30 08:16:46', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(203, 12340, 'Liza A Barezi', '2018-11-30 08:17:57', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(204, 12350, 'Dwi Prasetyo', '2018-11-30 08:22:10', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(205, 12342, 'Faza Ghassani', '2018-11-30 08:22:36', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(206, 12351, 'Imam Sulthon', '2018-11-30 08:33:44', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0),
+(207, 12354, 'Abdul Rohman', '2018-11-30 08:34:06', NULL, 0, 'kamera 1', 'Tepat Waktu', 'IN', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1031,7 +1064,85 @@ INSERT INTO `face_keamanan` (`id`, `nama`, `waktu`, `kamera`, `aktif_notif`) VAL
 (718, 'Wahyudi Prasatia', '2018-11-27 08:25:42', 'kamera 1', 0),
 (719, 'Imam Sulthon', '2018-11-27 08:31:56', 'kamera 1', 0),
 (720, 'Imam Sulthon', '2018-11-27 08:32:01', 'kamera 1', 0),
-(721, 'Muhammad Yasir Abdulazis', '2018-11-27 08:47:46', 'kamera 1', 0);
+(721, 'Muhammad Yasir Abdulazis', '2018-11-27 08:47:46', 'kamera 1', 0),
+(722, 'Wahyudi Prasatia', '2018-11-27 17:43:29', 'kamera 1', 0),
+(723, 'Vicky Yuliandi Siahaan', '2018-11-27 17:52:04', 'kamera 1', 0),
+(724, 'Liza A Barezi', '2018-11-27 17:53:07', 'kamera 1', 0),
+(725, 'Teoderikus Ferdian', '2018-11-27 18:14:32', 'kamera 1', 0),
+(726, 'Firdauz Fanani', '2018-11-27 18:16:02', 'kamera 1', 0),
+(727, 'Imam Sulthon', '2018-11-27 18:30:10', 'kamera 1', 0),
+(728, 'Wahyudi Prasatia', '2018-11-27 18:56:47', 'kamera 1', 0),
+(729, 'Tonny Siregar', '2018-11-27 18:58:39', 'kamera 1', 0),
+(730, 'Dwi Prasetyo', '2018-11-27 19:10:51', 'kamera 1', 0),
+(731, 'Dwi Prasetyo', '2018-11-27 19:11:02', 'kamera 1', 0),
+(732, 'Abdul Rohman', '2018-11-27 19:27:06', 'kamera 1', 0),
+(733, 'Riyadi Agung Suharto', '2018-11-28 08:26:08', 'kamera 1', 0),
+(734, 'Abdul Rohman', '2018-11-28 08:26:26', 'kamera 1', 0),
+(735, 'Tonny Siregar', '2018-11-28 10:17:55', 'kamera 1', 0),
+(736, 'Riyadi Agung Suharto', '2018-11-28 16:06:42', 'kamera 1', 0),
+(737, 'Riyadi Agung Suharto', '2018-11-28 16:07:01', 'kamera 1', 0),
+(738, 'Riyadi Agung Suharto', '2018-11-28 16:08:05', 'kamera 1', 0),
+(739, 'Riyadi Agung Suharto', '2018-11-28 16:09:01', 'kamera 1', 0),
+(740, 'Riyadi Agung Suharto', '2018-11-28 16:12:28', 'kamera 1', 0),
+(741, 'Faza Ghassani', '2018-11-28 16:14:01', 'kamera 1', 0),
+(742, 'Faza Ghassani', '2018-11-28 16:15:40', 'kamera 1', 0),
+(743, 'Firdauz Fanani', '2018-11-28 17:31:35', 'kamera 1', 0),
+(744, 'Faza Ghassani', '2018-11-28 17:51:34', 'kamera 1', 0),
+(745, 'Teoderikus Ferdian', '2018-11-28 18:39:16', 'kamera 1', 0),
+(746, 'Abdul Rohman', '2018-11-28 18:39:23', 'kamera 1', 0),
+(747, 'Dwi Prasetyo', '2018-11-28 19:01:50', 'kamera 1', 0),
+(748, 'Wahyudi Prasatia', '2018-11-28 20:38:32', 'kamera 1', 0),
+(749, 'Abdul Rohman', '2018-11-29 07:12:31', 'kamera 1', 0),
+(750, 'Riyadi Agung Suharto', '2018-11-29 07:19:30', 'kamera 1', 0),
+(751, 'Muhammad Yasir Abdulazis', '2018-11-29 08:21:14', 'kamera 1', 0),
+(752, 'Liza A Barezi', '2018-11-29 08:21:23', 'kamera 1', 0),
+(753, 'Wahyudi Prasatia', '2018-11-29 08:23:55', 'kamera 1', 0),
+(754, 'Wahyudi Prasatia', '2018-11-29 08:24:04', 'kamera 1', 0),
+(755, 'Vicky Yuliandi Siahaan', '2018-11-29 08:25:39', 'kamera 1', 0),
+(756, 'Dwi Prasetyo', '2018-11-29 08:28:30', 'kamera 1', 0),
+(757, 'Teoderikus Ferdian', '2018-11-29 08:29:37', 'kamera 1', 0),
+(758, 'Faza Ghassani', '2018-11-29 08:39:38', 'kamera 1', 0),
+(759, 'Imam Sulthon', '2018-11-29 08:47:42', 'kamera 1', 0),
+(760, 'Imam Sulthon', '2018-11-29 09:08:35', 'kamera 1', 0),
+(761, 'Imam Sulthon', '2018-11-29 09:09:11', 'kamera 1', 0),
+(762, 'Imam Sulthon', '2018-11-29 09:10:04', 'kamera 1', 0),
+(763, 'Imam Sulthon', '2018-11-29 12:00:32', 'kamera 1', 0),
+(764, 'Imam Sulthon', '2018-11-29 12:02:13', 'kamera 1', 0),
+(765, 'Riyadi Agung Suharto', '2018-11-29 17:48:45', 'kamera 1', 0),
+(766, 'Faza Ghassani', '2018-11-29 17:48:47', 'kamera 1', 0),
+(767, 'Vicky Yuliandi Siahaan', '2018-11-29 17:50:30', 'kamera 1', 0),
+(768, 'Teoderikus Ferdian', '2018-11-29 17:50:44', 'kamera 1', 0),
+(769, 'Liza A Barezi', '2018-11-29 17:54:02', 'kamera 1', 0),
+(770, 'Imam Sulthon', '2018-11-29 17:54:44', 'kamera 1', 0),
+(771, 'Firdauz Fanani', '2018-11-29 18:07:46', 'kamera 1', 0),
+(772, 'Dwi Prasetyo', '2018-11-29 19:09:36', 'kamera 1', 0),
+(773, 'Firdauz Fanani', '2018-11-30 06:09:55', 'kamera 1', 0),
+(774, 'Firdauz Fanani', '2018-11-30 06:10:03', 'kamera 1', 0),
+(775, 'Riyadi Agung Suharto', '2018-11-30 07:10:40', 'kamera 1', 0),
+(776, 'Riyadi Agung Suharto', '2018-11-30 07:11:01', 'kamera 1', 0),
+(777, 'Wahyudi Prasatia', '2018-11-30 07:37:43', 'kamera 1', 0),
+(778, 'Gusli Arifin', '2018-11-30 07:43:36', 'kamera 1', 0),
+(779, 'Teoderikus Ferdian', '2018-11-30 08:03:00', 'kamera 1', 0),
+(780, 'Vicky Yuliandi Siahaan', '2018-11-30 08:16:46', 'kamera 1', 0),
+(781, 'Liza A Barezi', '2018-11-30 08:17:57', 'kamera 1', 0),
+(782, 'Liza A Barezi', '2018-11-30 08:18:26', 'kamera 1', 0),
+(783, 'Dwi Prasetyo', '2018-11-30 08:22:10', 'kamera 1', 0),
+(784, 'Faza Ghassani', '2018-11-30 08:22:36', 'kamera 1', 0),
+(785, 'Imam Sulthon', '2018-11-30 08:33:44', 'kamera 1', 0),
+(786, 'Abdul Rohman', '2018-11-30 08:34:06', 'kamera 1', 0),
+(787, 'Tonny Siregar', '2018-11-30 13:17:32', 'kamera 1', 0),
+(788, 'Vicky Yuliandi Siahaan', '2018-11-30 14:05:00', 'kamera 1', 0);
+INSERT INTO `face_keamanan` (`id`, `nama`, `waktu`, `kamera`, `aktif_notif`) VALUES
+(789, 'Vicky Yuliandi Siahaan', '2018-11-30 14:07:28', 'kamera 1', 0),
+(790, 'Vicky Yuliandi Siahaan', '2018-11-30 14:11:17', 'kamera 1', 0),
+(791, 'Vicky Yuliandi Siahaan', '2018-11-30 14:17:21', 'kamera 1', 0),
+(792, 'Vicky Yuliandi Siahaan', '2018-11-30 14:20:55', 'kamera 1', 0),
+(793, 'Vicky Yuliandi Siahaan', '2018-11-30 14:21:06', 'kamera 1', 0),
+(794, 'Vicky Yuliandi Siahaan', '2018-11-30 14:23:09', 'kamera 1', 0),
+(795, 'Vicky Yuliandi Siahaan', '2018-11-30 14:24:14', 'kamera 1', 0),
+(796, 'Vicky Yuliandi Siahaan', '2018-11-30 14:27:32', 'kamera 1', 0),
+(797, 'Vicky Yuliandi Siahaan', '2018-11-30 14:31:24', 'kamera 1', 0),
+(798, 'Vicky Yuliandi Siahaan', '2018-11-30 14:42:10', 'kamera 1', 0);
 
 -- --------------------------------------------------------
 
@@ -1107,12 +1218,12 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `face_absensi`
 --
 ALTER TABLE `face_absensi`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 --
 -- AUTO_INCREMENT for table `face_keamanan`
 --
 ALTER TABLE `face_keamanan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=722;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=799;
 --
 -- AUTO_INCREMENT for table `ijin_absensi`
 --

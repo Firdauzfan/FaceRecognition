@@ -17,7 +17,7 @@ import argparse
 import sys
 from notify_run import Notify
 
-os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
+getwd= os.getcwd()
 
 def keamanan_notif():
         try:
@@ -54,7 +54,7 @@ def keamanan_notif():
                     notify = Notify()
                     notify.send('%s Memasuki Ruangan Terlarang' %checkingjeneng)
                     text = '%s , dari Divisi %s dengan nomor hp %s Memasuki Ruangan Terlarang' %(checkingjeneng,divisi,no_hp)
-                    id_tele= '707062800'
+                    id_tele= '205017793'
                     poto = open('hasil_keamanan/'+ checkingjeneng + waktu + ".jpg" , 'rb')
                     send_message_kemananan(text, id_tele, poto)
 
