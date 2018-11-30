@@ -17,7 +17,7 @@ import argparse
 import sys
 from notify_run import Notify
 
-getwd= os.getcwd()
+os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
 
 def keamanan_notif():
         try:

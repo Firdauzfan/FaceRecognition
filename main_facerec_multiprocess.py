@@ -17,10 +17,6 @@ from queue import Queue
 from threading import Thread
 from utils.app_utils import FPS, WebcamVideoStream
 
-CWD_PATH = os.getcwd()
-
-NUM_CLASSES = 90
-
 nama_detected_count={}
 
 def face_recog(frame, sess, detection_graph):
