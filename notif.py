@@ -11,7 +11,7 @@ from notify_run import Notify
 import cv2
 import smtplib
 
-os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
+getwd= os.getcwd()
 
 def notif_datang(insertdata,status):
     connection = pymysql.connect(host='localhost',
