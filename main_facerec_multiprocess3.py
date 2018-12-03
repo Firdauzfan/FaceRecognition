@@ -82,6 +82,36 @@ def worker(input_q, output_q):
     fps.stop()
     sess.close()
 
+def worker2(input_q2, output_q2):
+    # Load a (frozen) Tensorflow model into memory.
+    detection_graph = tf.Graph()
+    sess = tf.Session(graph=detection_graph)
+
+    fps = FPS().start()
+    while True:
+        fps.update()
+        frame2 = input_q2.get()
+        #frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        #output_q.put(face_recog(frame_rgb, sess, detection_graph))
+        output_q2.put(face_recog(frame2, sess, detection_graph))
+    fps.stop()
+    sess.close()
+
+def worker3(input_q3, output_q3):
+    # Load a (frozen) Tensorflow model into memory.
+    detection_graph = tf.Graph()
+    sess = tf.Session(graph=detection_graph)
+
+    fps = FPS().start()
+    while True:
+        fps.update()
+        frame3 = input_q3.get()
+        #frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        #output_q.put(face_recog(frame_rgb, sess, detection_graph))
+        output_q3.put(face_recog(frame3, sess, detection_graph))
+    fps.stop()
+    sess.close()
+
 def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
     '''
     :param features_arr: a list of 128d Features of all faces on screen
@@ -130,38 +160,120 @@ if __name__ == '__main__':
         t.daemon = True
         t.start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801',
+    input_q2 = Queue(5)  # fps is better if queue is higher but then more lags
+    output_q2 = Queue()
+    for i in range(1):
+        t2 = Thread(target=worker2, args=(input_q2, output_q2))
+        t2.daemon = True
+        t2.start()
+
+    input_q3 = Queue(5)  # fps is better if queue is higher but then more lags
+    output_q3 = Queue()
+    for i in range(1):
+        t3 = Thread(target=worker3, args=(input_q3, output_q3))
+        t3.daemon = True
+        t3.start()
+
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301',
                                       width=args.width,
                                       height=args.height).start()
+
+    video_capture2 = WebcamVideoStream(src='rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?',
+                                      width=args.width,
+                                      height=args.height).start()
+
+    video_capture3 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/401',
+                                      width=args.width,
+                                      height=args.height).start()
+
     fps = FPS().start()
 
     while True:
+        #frame = video_capture.read()
         frame = video_capture.read()
-        input_q.put(frame)
+        frame2 = video_capture2.read()
+        frame3 = video_capture3.read()
 
-        t = time.time()
+        if frame.any():
+            input_q.put(frame)
 
-        if output_q.empty():
-            pass  # fill up queue
-        else:
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            datakeluar = output_q.get()
-            try:
-                rects = datakeluar['rects']
-                recog_data = datakeluar['recog_data']
-                for (i,rect) in enumerate(rects):
-                    ts = time.time()
-                    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+            t = time.time()
 
-                    cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
-                    #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
-                    cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+            if output_q.empty():
+                pass  # fill up queue
+            else:
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                datakeluar = output_q.get()
+                try:
+                    rects = datakeluar['rects']
+                    recog_data = datakeluar['recog_data']
+                    for (i,rect) in enumerate(rects):
+                        ts = time.time()
+                        timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
 
-            except Exception as e:
-                pass
+                        cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
+                        #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                        cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
-        cv2.imshow('Video', frame)
-        fps.update()
+                except Exception as e:
+                    pass
+
+            cv2.imshow('Video', frame)
+            fps.update()
+
+        if frame2.any():
+            input_q2.put(frame2)
+
+            t = time.time()
+
+            if output_q2.empty():
+                pass  # fill up queue
+            else:
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                datakeluar = output_q2.get()
+                try:
+                    rects = datakeluar['rects']
+                    recog_data = datakeluar['recog_data']
+                    for (i,rect) in enumerate(rects):
+                        ts = time.time()
+                        timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+
+                        cv2.rectangle(frame2,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
+                        #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                        cv2.putText(frame2,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+
+                except Exception as e:
+                    pass
+
+            cv2.imshow('Video2', frame2)
+            fps.update()
+
+            if frame3.any():
+                input_q3.put(frame3)
+
+                t = time.time()
+
+                if output_q3.empty():
+                    pass  # fill up queue
+                else:
+                    font = cv2.FONT_HERSHEY_SIMPLEX
+                    datakeluar = output_q3.get()
+                    try:
+                        rects = datakeluar['rects']
+                        recog_data = datakeluar['recog_data']
+                        for (i,rect) in enumerate(rects):
+                            ts = time.time()
+                            timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+
+                            cv2.rectangle(frame3,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
+                            #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                            cv2.putText(frame3,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+
+                    except Exception as e:
+                        pass
+
+                cv2.imshow('Video3', frame3)
+                fps.update()
 
         #print('[INFO] elapsed time: {:.2f}'.format(time.time() - t))
 
