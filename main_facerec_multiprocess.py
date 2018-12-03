@@ -130,7 +130,7 @@ if __name__ == '__main__':
         t.daemon = True
         t.start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801',
+    video_capture = WebcamVideoStream(src='rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?',
                                       width=args.width,
                                       height=args.height).start()
     fps = FPS().start()

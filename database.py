@@ -49,11 +49,11 @@ def data(insertdata,kamera,frame):
                     namefile = "hasil_keamanan/"+ insertdata + timestamp + ".jpg"
                     cv2.imwrite(namefile, frame)
 
-                    sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`aktif_notif`) VALUES (%s,%s,%s,'1') "
+                    sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`status`,`aktif_notif`) VALUES (%s,%s,%s,'melanggar','1') "
                     cursor.execute(sql, (insertdata,timestamp,kamera))
                     process = subprocess.Popen("python3 notif_keamanan.py", shell=True)
                 else:
-                    sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`aktif_notif`) VALUES (%s,%s,%s,'0') "
+                    sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`status`,`aktif_notif`) VALUES (%s,%s,%s,'tidak melanggar','0') "
                     cursor.execute(sql, (insertdata,timestamp,kamera))
 
 
