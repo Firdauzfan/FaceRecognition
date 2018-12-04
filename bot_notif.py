@@ -5,11 +5,11 @@ import urllib
 import database
 import telebot
 
-TOKEN = "625701624:AAGvxucdxeUhSb8Cj5qFuYt0Ppf9vg4Ua5U"
+TOKEN = "721580590:AAG-Zsna6csJTGKe8_OVms0YAQfCXwTjAUw"
 bot = telebot.TeleBot(TOKEN)
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 
-TOKEN2 = "784407284:AAGLb28Y_pwIos-XPYsLGGPjoEtrI0YyXTk"
+TOKEN2 = "721580590:AAG-Zsna6csJTGKe8_OVms0YAQfCXwTjAUw"
 bot2 = telebot.TeleBot(TOKEN2)
 URL2 = "https://api.telegram.org/bot{}/".format(TOKEN2)
 
