@@ -9,7 +9,7 @@ TOKEN = "721580590:AAG-Zsna6csJTGKe8_OVms0YAQfCXwTjAUw"
 bot = telebot.TeleBot(TOKEN)
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 
-TOKEN2 = "721580590:AAG-Zsna6csJTGKe8_OVms0YAQfCXwTjAUw"
+TOKEN2 = "662969455:AAHgjBFBvzz_OVybnW5q9MO9SLRRuwvqTi4"
 bot2 = telebot.TeleBot(TOKEN2)
 URL2 = "https://api.telegram.org/bot{}/".format(TOKEN2)
 
