@@ -46,7 +46,7 @@ def face_recog(frame, sess, detection_graph):
                 nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
                 print(nama_detected_count)
                 kamera="kamera 1"
-                if len(nama_detected_count[recog_data[i][0]])>=5:
+                if len(nama_detected_count[recog_data[i][0]])>=3:
                     nama_detected_count.clear()
                     if timestamp>'06:00:00' and timestamp<'08:45:00':
                         status="Tepat Waktu"#
@@ -174,15 +174,15 @@ if __name__ == '__main__':
         t3.daemon = True
         t3.start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301',
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.158:554/PSIA/streaming/channels/101',
                                       width=args.width,
                                       height=args.height).start()
 
-    video_capture2 = WebcamVideoStream(src='rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?',
+    video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.159:554/PSIA/streaming/channels/101',
                                       width=args.width,
                                       height=args.height).start()
 
-    video_capture3 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/401',
+    video_capture3 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.155:554/PSIA/streaming/channels/101',
                                       width=args.width,
                                       height=args.height).start()
 

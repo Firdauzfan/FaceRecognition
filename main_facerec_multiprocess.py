@@ -46,7 +46,7 @@ def face_recog(frame, sess, detection_graph):
                 nama_detected_count.setdefault(recog_data[i][0], []).append(recog_data[i][0])
                 print(nama_detected_count)
                 kamera="kamera 1"
-                if len(nama_detected_count[recog_data[i][0]])>=5:
+                if len(nama_detected_count[recog_data[i][0]])>=3:
                     nama_detected_count.clear()
                     if timestamp>'06:00:00' and timestamp<'08:45:00':
                         status="Tepat Waktu"#
@@ -82,7 +82,7 @@ def worker(input_q, output_q):
     fps.stop()
     sess.close()
 
-def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
+def findPeople(features_arr, positions, thres = 0.6, percent_thres = 85):
     '''
     :param features_arr: a list of 128d Features of all faces on screen
     :param positions: a list of face position types of all faces on screen
@@ -130,7 +130,7 @@ if __name__ == '__main__':
         t.daemon = True
         t.start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.159:554/PSIA/streaming/channels/101',
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801',
                                       width=args.width,
                                       height=args.height).start()
     fps = FPS().start()
