@@ -21,6 +21,8 @@ Face Recognition for Security and Absence Record with integrated with telegram b
 
     numpy
 
+    sudo apt-get install mpg321
+
     tensorflow ( 1.1.0-rc or  1.2.0 is recommended )
 
 
