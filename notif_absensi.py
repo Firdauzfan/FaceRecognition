@@ -31,17 +31,17 @@ def notif():
                                          cursorclass=pymysql.cursors.DictCursor)
             with connection.cursor() as cursor:
                 # Create a new record
-                ts = time.time()
-                timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
                 ceksql= "SELECT COUNT(nama_pegawai) AS ceknama FROM `face_absensi` WHERE DATE(`waktu_masuk`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
                 cursor.execute(ceksql)
                 checking = cursor.fetchone()
                 print(checking.get('ceknama'))
                 if checking.get('ceknama')>=1:
-                    ceksql= "SELECT nama_pegawai FROM `face_absensi` WHERE DATE(`waktu_masuk`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
+                    ceksql= "SELECT nama_pegawai,waktu_masuk FROM `face_absensi` WHERE DATE(`waktu_masuk`) = DATE(CURDATE()) AND aktif_notif='1' LIMIT 1"
                     cursor.execute(ceksql)
                     checking = cursor.fetchone()
                     insertdata=checking.get('nama_pegawai')
+                    ts = checking.get('waktu_masuk')
+                    timestamp = ts.strftime('%H:%M:%S')
                     if timestamp>'06:00:00' and timestamp<'08:45:00':
                         status="Tepat Waktu"
                         notif=notif_datang(insertdata,status)
