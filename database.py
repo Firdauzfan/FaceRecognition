@@ -97,6 +97,7 @@ def datang(insertdata,kamera,status,frame):
                 sql = "INSERT INTO `face_absensi`(`employee_id`, `nama_pegawai`, `waktu_masuk`,`kamera`, `note`, `state`, `aktif_terlambat`,`aktif_notif`,`selisih_waktu`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) "
                 cursor.execute(sql, (emp_id,insertdata,timestamp,kamera,status,state,'0','1','0'))
                 #os.system('spd-say "Welcome to Graha Sumber Prima Elektronik %s"' %insertdata)
+                process1 = subprocess.Popen("python3 notif_sound.py --user '%s' --mode Welcome" %insertdata, shell=True)
 
 
                 selisih_wkt="SELECT (TIME_TO_SEC(waktu_masuk) - TIME_TO_SEC('8:45:00'))/60 AS selisih_waktu FROM `face_absensi` WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
@@ -148,7 +149,8 @@ def datang(insertdata,kamera,status,frame):
 
                             # updateterlambat= "UPDATE `face_absensi` SET `aktif_terlambat`='0' WHERE nama_pegawai=%s AND MONTH(waktu_masuk)=MONTH(CURDATE())"
                             # cursor.execute(updateterlambat, (insertdata))
-                process = subprocess.Popen("python3 notif_absensi.py", shell=True)
+                #process = subprocess.Popen("python3 notif_absensi.py", shell=True)
+                process = subprocess.Popen("python3 notif_absentele.py --user '%s' --mode Welcome --status '%s'" %(insertdata,status), shell=True)
                 # os.system("mpg321 AudioFile/'%s Welcome.mp3' -quiet" %insertdata)
         # connection is not autocommit by default. So you must commit to save
         # your changes.
@@ -185,7 +187,9 @@ def balik(insertdata,kamera,frame):
                 cv2.imwrite(namefile, frame)
                 sql = "UPDATE `face_absensi` SET `waktu_keluar`=%s,`state`=%s,`aktif_notif`='1' WHERE nama_pegawai=%s AND DATE(`waktu_masuk`) = DATE(CURDATE())"
                 cursor.execute(sql, (timestamp,state,insertdata))
-                process = subprocess.Popen("python3 notif_absensi.py", shell=True)
+                process1 = subprocess.Popen("python3 notif_sound.py --user '%s' --mode Goodbye" %(insertdata), shell=True)
+                #process = subprocess.Popen("python3 notif_absensi.py", shell=True)
+                process = subprocess.Popen("python3 notif_absentele.py --user '%s' --mode Goodbye" %(insertdata), shell=True)
                 #os.system("mpg321 AudioFile/'%s Goodbye.mp3' -quiet" %insertdata)
 
         # connection is not autocommit by default. So you must commit to save

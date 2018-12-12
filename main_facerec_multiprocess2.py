@@ -160,7 +160,7 @@ if __name__ == '__main__':
     #                                   width=args.width,
     #                                   height=args.height).start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.80:554/PSIA/streaming/channels/801',
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.80:554/PSIA/streaming/channels/101',
                                       width=args.width,
                                       height=args.height).start()
 
