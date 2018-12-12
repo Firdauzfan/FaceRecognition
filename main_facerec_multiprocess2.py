@@ -152,11 +152,19 @@ if __name__ == '__main__':
         t2.daemon = True
         t2.start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801',
+    # video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801',
+    #                                   width=args.width,
+    #                                   height=args.height).start()
+    #
+    # video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.42:554/PSIA/streaming/channels/101',
+    #                                   width=args.width,
+    #                                   height=args.height).start()
+
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.80:554/PSIA/streaming/channels/801',
                                       width=args.width,
                                       height=args.height).start()
 
-    video_capture2 = WebcamVideoStream(src='rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?',
+    video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.70:554/PSIA/streaming/channels/101',
                                       width=args.width,
                                       height=args.height).start()
 
@@ -185,8 +193,8 @@ if __name__ == '__main__':
                         timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
 
                         cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
-                        #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
-                        cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                        cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                        #cv2.putText(frame,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                 except Exception as e:
                     pass
@@ -212,8 +220,8 @@ if __name__ == '__main__':
                         timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
 
                         cv2.rectangle(frame1,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
-                        #cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
-                        cv2.putText(frame1,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                        cv2.putText(frame1,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+                        #cv2.putText(frame1,recog_data[i][0],(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
                 except Exception as e:
                     pass

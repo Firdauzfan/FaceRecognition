@@ -40,16 +40,21 @@ def notif():
                     cursor.execute(ceksql)
                     checking = cursor.fetchone()
                     insertdata=checking.get('nama_pegawai')
-                    ts = checking.get('waktu_masuk')
-                    timestamp = ts.strftime('%H:%M:%S')
+                    ts = time.time()
+                    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+                    # ts = checking.get('waktu_masuk')
+                    # timestamp = ts.strftime('%H:%M:%S')
                     if timestamp>'06:00:00' and timestamp<'08:45:00':
                         status="Tepat Waktu"
                         notif=notif_datang(insertdata,status)
+                        os.system("mpg321 AudioFile/'%s Welcome.mp3' -quiet" %insertdata)
                     elif timestamp>'08:45:00' and timestamp<'17:30:00':
                         status="Terlambat"
                         notif=notif_datang(insertdata,status)
+                        os.system("mpg321 AudioFile/'%s Welcome.mp3' -quiet" %insertdata)
                     elif timestamp>'17:30:00' and timestamp<'23:59:00':
                         notif=balik_notif(insertdata)
+                        os.system("mpg321 AudioFile/'%s Goodbye.mp3' -quiet" %insertdata)
             connection.commit()
             return True
 
