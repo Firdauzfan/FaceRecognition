@@ -51,7 +51,7 @@ def data(insertdata,kamera,frame):
 
                     sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`status`,`aktif_notif`) VALUES (%s,%s,%s,'melanggar','1') "
                     cursor.execute(sql, (insertdata,timestamp,kamera))
-                    process = subprocess.Popen("python3 notif_keamanan.py", shell=True)
+                    process = subprocess.Popen("python3 notif_keamanantele.py --user '%s' --waktu '%s'" %(insertdata,timestamp), shell=True)
                 else:
                     sql = "INSERT INTO `face_keamanan`(`nama`, `waktu`, `kamera`,`status`,`aktif_notif`) VALUES (%s,%s,%s,'tidak melanggar','0') "
                     cursor.execute(sql, (insertdata,timestamp,kamera))

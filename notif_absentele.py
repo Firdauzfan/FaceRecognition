@@ -135,9 +135,9 @@ def balik_notif(insertdata):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--user", type=str, help="Run Notif Suara", default="None")
-parser.add_argument("--mode", type=str, help="Run Notif Suara", default="None")
-parser.add_argument("--status", type=str, help="Run Notif Suara", default="None")
+parser.add_argument("--user", type=str, help="Run Notif User Absen", default="None")
+parser.add_argument("--mode", type=str, help="Run Notif Mode Absen", default="None")
+parser.add_argument("--status", type=str, help="Run Notif Status Absen", default="None")
 args = parser.parse_args(sys.argv[1:])
 
 user = args.user
