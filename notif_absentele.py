@@ -1,34 +1,15 @@
 import pymysql.cursors
 import time
 import datetime
-import main_facerec
-import main_facerec2
-import main_facerec3
 import os
-from bot_notif import *
-from email_notif import *
-from notify_run import Notify
 import cv2
 import smtplib
+import argparse
+import sys
+from bot_notif import *
+from email_notif import *
 
 os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
-
-parser = argparse.ArgumentParser()
-parser.add_argument("--user", type=str, help="Run Notif Suara", default="None")
-parser.add_argument("--mode", type=str, help="Run Notif Suara", default="None")
-parser.add_argument("--status", type=str, help="Run Notif Suara", default="None")
-args = parser.parse_args(sys.argv[1:])
-
-user = args.user
-mode = args.mode
-status = args.status
-
-if(mode == "Welcome"):
-    notif_datang(user,status)
-elif mode == "Goodbye":
-    balik_notif(user);
-else:
-    raise ValueError("Unimplemented mode")
 
 def notif_datang(insertdata,status):
     connection = pymysql.connect(host='localhost',
@@ -151,3 +132,21 @@ def balik_notif(insertdata):
 
     finally:
         connection.close()
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--user", type=str, help="Run Notif Suara", default="None")
+parser.add_argument("--mode", type=str, help="Run Notif Suara", default="None")
+parser.add_argument("--status", type=str, help="Run Notif Suara", default="None")
+args = parser.parse_args(sys.argv[1:])
+
+user = args.user
+mode = args.mode
+status = args.status
+
+if(mode == "Welcome"):
+    notif_datang(user,status)
+elif mode == "Goodbye":
+    balik_notif(user);
+else:
+    raise ValueError("Unimplemented mode")
