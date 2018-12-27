@@ -1,13 +1,15 @@
 '''
 Tensorflow implementation of the mtcnn face detection algorithm
-
-Credit: DavidSandBerg for implementing this method on tensorflow
 '''
 from six import string_types, iteritems
 import numpy as np
 import tensorflow as tf
 import cv2
 import os
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.Session(config = config)
 
 class MTCNNDetect(object):
     def __init__(self, face_rec_graph, model_path = "models", threshold = [0.6, 0.7, 0.7], factor = 0.709, scale_factor = 1):

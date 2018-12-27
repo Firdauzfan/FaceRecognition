@@ -1,7 +1,6 @@
 '''
 Load pretrain models and create a tensorflow session to run them
 
-@Author: David Vu
 '''
 import tensorflow as tf
 

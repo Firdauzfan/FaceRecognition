@@ -114,6 +114,7 @@ def findPeople(features_arr, positions, thres = 0.6, percent_thres = 85):
             person_data = data_set[person][positions[i]];
             for data in person_data:
                 distance = np.sqrt(np.sum(np.square(data-features_128D)))
+                #print(distance)
                 if(distance < smallest):
                     smallest = distance;
                     result = person;
@@ -152,21 +153,21 @@ if __name__ == '__main__':
         t2.daemon = True
         t2.start()
 
-    # video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801',
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.39:554/PSIA/streaming/channels/801',
+                                      width=args.width,
+                                      height=args.height).start()
+
+    video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.21:554/PSIA/streaming/channels/101',
+                                      width=args.width,
+                                      height=args.height).start()
+
+    # video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.80:554/PSIA/streaming/channels/101',
     #                                   width=args.width,
     #                                   height=args.height).start()
     #
-    # video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.42:554/PSIA/streaming/channels/101',
+    # video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.70:554/PSIA/streaming/channels/101',
     #                                   width=args.width,
     #                                   height=args.height).start()
-
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.80:554/PSIA/streaming/channels/101',
-                                      width=args.width,
-                                      height=args.height).start()
-
-    video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@10.20.1.70:554/PSIA/streaming/channels/101',
-                                      width=args.width,
-                                      height=args.height).start()
 
     fps = FPS().start()
 

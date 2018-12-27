@@ -142,9 +142,6 @@ def create_manual_data():
     f.write(json.dumps(data_set))
 
 
-
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", type=str, help="Run camera recognition", default="camera")

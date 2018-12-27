@@ -48,7 +48,7 @@ def camera_recog():
     #vs = cv2.VideoCapture(0); #get input from webcam
     #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
-    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.159:554/PSIA/streaming/channels/101")
+    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.39:554/PSIA/streaming/channels/801")
     #vs = cv2.VideoCapture("rtsp://10.8.250.9:554/user=admin&password=56789E&channel=9&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=12&stream=0.sdp?")
@@ -132,7 +132,7 @@ def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
         for person in data_set.keys():
             person_data = data_set[person][positions[i]];
             for data in person_data:
-                distance = np.sqrt(np.sum(np.square(data-features_128D)))
+                #distance = np.sqrt(np.sum(np.square(data-features_128D)))
                 if(distance < smallest):
                     smallest = distance;
                     result = person;
@@ -154,7 +154,7 @@ User input his/her name or ID -> Images from Video Capture -> detect the face ->
 
 '''
 def create_manual_data():
-    vs = cv2.VideoCapture(0); #get input from webcam
+    vs = cv2.VideoCapture(1); #get input from webcam
 
     print("Please input new user ID:")
     new_name = input(); #ez python input()
@@ -165,7 +165,8 @@ def create_manual_data():
     print("Please start turning slowly. Press 'q' to save and add this new user to the dataset");
     while True:
         _, frame = vs.read();
-        rects, landmarks = face_detect.detect_face(frame, 80);  # min face size is set to 80x80
+        rects, landmarks = face_detect.detect_face(frame, 30);  # min face size is set to 80x80
+        print(rects)
         for (i, rect) in enumerate(rects):
             aligned_frame, pos = aligner.align(160,frame,landmarks[i]);
             if len(aligned_frame) == 160 and len(aligned_frame[0]) == 160:

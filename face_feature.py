@@ -1,11 +1,14 @@
 '''
-@Author: David Vu
 Run the pretrained model to extract 128D face features
 '''
 
 import tensorflow as tf
 from architecture import inception_resnet_v1 as resnet
 import numpy as np
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.Session(config = config)
 
 class FaceFeature(object):
     def __init__(self, face_rec_graph, model_path = 'models/model-20170512-110547.ckpt-250000'):

@@ -127,8 +127,8 @@ class AlignCustom(object):
         to_points = []
 
         for i in range(int(len(shape) / 2)):
-            x = (padding + mean_face_shape_x[i]) / (2 * padding + 0.8) * desired_size
-            y = (padding + mean_face_shape_y[i]) / (2 * padding + 2.4) * desired_size
+            x = (padding + mean_face_shape_x[i]) / (2 * padding + 1) * desired_size
+            y = (padding + mean_face_shape_y[i]) / (2 * padding + 1) * desired_size
             to_points.append([x, y])
             from_points.append([shape[2 * i], shape[2 * i + 1]])
 
