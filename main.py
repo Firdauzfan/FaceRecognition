@@ -145,9 +145,9 @@ def create_manual_data():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", type=str, help="Run camera recognition", default="camera")
-    args = parser.parse_args(sys.argv[1:]);
-    FRGraph = FaceRecGraph();
-    aligner = AlignCustom();
+    args = parser.parse_args(sys.argv[1:])
+    FRGraph = FaceRecGraph()
+    aligner = AlignCustom()
     extract_feature = FaceFeature(FRGraph)
-    face_detect = MTCNNDetect(FRGraph, scale_factor=2); #scale_factor, rescales image for faster detection
-    main(args);
+    face_detect = MTCNNDetect(FRGraph, scale_factor=2) #scale_factor, rescales image for faster detection
+    main(args)
