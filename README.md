@@ -36,7 +36,7 @@ Face Recognition for Security and Absence Record with integrated with telegram b
     atau `python3 main_facerec_multiprocess2.py` untuk run 2 kamera sekaligus
     atau `python3 main_facerec_multiprocess3.py` untuk run 3 kamera sekaligus
 
-    `python3 main_facerec.py --mode "input"` to add new user. Start turning left, right, up, down after inputting the new name. Turn slowly to avoid blurred images
+    `python3 main_facerec.py --mode "input"` to add new user. Start turning left, right, center after inputting the new name. Turn slowly to avoid blurred images
 
     Tambahkan pada crontab -e linux untuk back up notif:
     */1 * * * * /usr/bin/python3 ~/Documents/firdauzfanani/FaceRecognition/notif_absensi.py
