@@ -5,8 +5,7 @@ Face Recognition for Security and Absence Record with integrated with telegram b
 ## Installation:
     1. Install the dependencies
 
-    2. Download the pretrained models here: https://drive.google.com/file/d/0Bx4sNrhhaBr3TDRMMUN3aGtHZzg/view?usp=sharing
-    Or from release
+    2. Download the pretrained models from release
 
         Then extract those files into models
 
