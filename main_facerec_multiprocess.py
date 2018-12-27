@@ -82,7 +82,7 @@ def worker(input_q, output_q):
     fps.stop()
     sess.close()
 
-def findPeople(features_arr, positions, thres = 0.6, percent_thres = 85):
+def findPeople(features_arr, positions, thres = 0.6, percent_thres = 75):
     '''
     :param features_arr: a list of 128d Features of all faces on screen
     :param positions: a list of face position types of all faces on screen
@@ -130,7 +130,7 @@ if __name__ == '__main__':
         t.daemon = True
         t.start()
 
-    video_capture = WebcamVideoStream(src=0,
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.21:554/PSIA/streaming/channels/101',
                                       width=args.width,
                                       height=args.height).start()
     fps = FPS().start()
