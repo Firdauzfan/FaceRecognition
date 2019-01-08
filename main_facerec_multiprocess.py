@@ -82,7 +82,7 @@ def worker(input_q, output_q):
     fps.stop()
     sess.close()
 
-def findPeople(features_arr, positions, thres = 0.6, percent_thres = 75):
+def findPeople(features_arr, positions, thres = 0.6, percent_thres = 85):
     '''
     :param features_arr: a list of 128d Features of all faces on screen
     :param positions: a list of face position types of all faces on screen
