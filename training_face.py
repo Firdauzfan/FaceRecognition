@@ -7,11 +7,14 @@ import argparse
 import sys
 import json
 import numpy as np
+import os
+
+os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
 
 def main_training():
     vs = cv2.VideoCapture(1)
 
-    s,name = sys.argv
+    name = sys.argv[1]
     print(name)
     # print("Input User baru ID tanpa menggunakan spasi:")
     # nama_baru = input()
