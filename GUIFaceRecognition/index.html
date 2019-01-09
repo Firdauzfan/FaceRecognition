@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>Absence System VIO Intelligence</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="wrapper">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>VIO Intelligence</h1>
+						<p>Absence System with Face Recognition</p>
+						<nav>
+							<ul>
+                <li><a href="trainface.html"><img style="width:70%" src="images/face.jpeg"/><span class="label">Training Face</span></a></li>
+								<li><a href="facerec.html"><img style="width:70%" src="images/recognition.png"/><span class="label">Face Recognition</span></a></li>
+								<li><a href="http://127.0.0.1:5000/detect"><img style="width:70%" src="images/recognition.png"/><span class="label">Object Detecion</span></a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<span class="copyright">&copy;<a href="gspe.co.id">PT VIO Intelligence</a></span>
+					</footer>
+
+			</div>
+		</div>
+		<script>
+			window.onload = function() { document.body.classList.remove('is-preload'); }
+			window.ontouchmove = function() { return false; }
+			window.onorientationchange = function() { document.body.scrollTop = 0; }
+		</script>
+	</body>
+</html>
