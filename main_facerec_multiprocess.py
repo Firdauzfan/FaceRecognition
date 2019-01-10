@@ -18,6 +18,7 @@ from threading import Thread
 from utils.app_utils import FPS, WebcamVideoStream
 
 nama_detected_count={}
+os.chdir('/home/gspe/Documents/firdauzfanani/FaceRecognition')
 
 def face_recog(frame, sess, detection_graph):
     rects, landmarks = face_detect.detect_face(frame,30);#min face size is set to 80x80

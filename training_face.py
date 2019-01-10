@@ -31,9 +31,11 @@ def main_training():
             aligned_frame, pos = aligner.align(160,frame,landmarks[i])
             if len(aligned_frame) == 160 and len(aligned_frame[0]) == 160:
                 person_imgs[pos].append(aligned_frame)
+                cv2.namedWindow('Captured face', cv2.WINDOW_NORMAL)
                 cv2.imshow("Captured face", aligned_frame)
+
         key = cv2.waitKey(1) & 0xFF
-        if key == ord("q"):
+        if key == ord("s"):
             break
         elif key == ord("c"):
             person_imgs.clear()

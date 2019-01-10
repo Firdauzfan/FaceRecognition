@@ -4,9 +4,6 @@ import datetime
 import pymysql.cursors
 import time
 import datetime
-import main_facerec
-import main_facerec2
-import main_facerec3
 import os
 from bot_notif import *
 from email_notif import *

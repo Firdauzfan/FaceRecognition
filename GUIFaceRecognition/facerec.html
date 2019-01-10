@@ -1,27 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="linkers/face.js"></script>
+	<title>Recognize Face</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.min.js"></script>
+  <script src="linkjs/facerec.js"></script>
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 </head>
 
 <body>
-  <br>
-  <div class="container">
-    <button class="btn btn-info"><a style="color:white" href="index.html">< Back</a></button>
-    <div class="jumbotron">
-      <h1>Face Recognition</h1>
-      <h1>Powered by VIO Intelligence</h1>
-      <p>Absence System with Face Recognition</p>
-    </div>
-    <br>
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<!-- <div class="loader"></div> -->
+				<span class="contact100-form-title">
+					VIO Intelligence
+          Recognize Face
+				</span>
 
-    <button id="detect" class="btn btn-success" onclick="detect_faces()">Detect faces</button>
-    <br>
-    <br>
-    <label>Who's face do you want to add?</label>
-    <br>
-    <input type="text" placeholder="Name" id="person"/>
-    <button id="add" class="btn btn-warning" onclick="add_face()">Add a new face</button>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn" id="detect" onclick="detect_faces()">
+							<span>
+								Run Face Recognition
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+				</div>
 
-  </div>
-<body>
+        <div class="container-contact100-form-btn">
+          <div class="wrap-contact100-form-btn">
+            <div class="contact100-form-bgbtn"></div>
+            <button class="contact100-form-btn">
+              <span>
+                Streaming Camera
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <button class="contact100-form-btn">
+            <span>
+              <a href="index.html">Back
+              <i class="fa fa-long-arrow-left m-l-7" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+
+		</div>
+	</div>
+
+<!--===============================================================================================-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+
+
+</body>
+</html>

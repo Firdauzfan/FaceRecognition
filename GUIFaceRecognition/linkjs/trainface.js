@@ -14,7 +14,7 @@ function add_face(){
   };
   console.log(options);
   var face = new PythonShell("training_face.py", options);
-  swal("Training Face", "Please start turning slowly. Press 'q' to save or 'c' to cancel adding this new user to the dataset", "warning")
+  swal("Training Face", "Please start turning slowly. Press 's' to save or 'c' to cancel adding this new user to the dataset", "warning")
   console.log(face);
 
   face.end(function(err, code, message) {
