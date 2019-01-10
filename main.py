@@ -39,7 +39,7 @@ def camera_recog():
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
     #vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.21:554/PSIA/streaming/channels/101")
+    vs = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
     while True:
         _,frame = vs.read();
         #u can certainly add a roi here but for the sake of a demo i'll just leave t as simple as this
@@ -114,7 +114,7 @@ User input his/her name or ID -> Images from Video Capture -> detect the face ->
 
 '''
 def create_manual_data():
-    vs = cv2.VideoCapture(1); #get input from webcam
+    vs = cv2.VideoCapture(0); #get input from webcam
 
     print("Please input new user ID:")
     new_name = input(); #ez python input()

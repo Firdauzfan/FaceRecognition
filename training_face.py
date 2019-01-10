@@ -35,6 +35,11 @@ def main_training():
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
+        elif key == ord("c"):
+            person_imgs.clear()
+            person_features.clear()
+            del nama_baru
+            break
 
     for pos in person_imgs:
         person_features[pos] = [np.mean(extract_feature.get_features(person_imgs[pos]),axis=0).tolist()]

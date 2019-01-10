@@ -14,20 +14,28 @@ function add_face(){
   };
   console.log(options);
   var face = new PythonShell("training_face.py", options);
+  swal("Training Face", "Please start turning slowly. Press 'q' to save or 'c' to cancel adding this new user to the dataset", "warning")
   console.log(face);
-  
-  face.end(function(err, code, message) {
-    swal({
-      title: "Your Face Data has been Saved?",
-      text: "If you click 'OK', you will be redirected to Home",
-      type: "success",
-      showCancelButton: true
-    }, function() {
-      // Redirect the user
-      window.location.href = "index.html";
-      console.log(window.location.href)
-    });
 
+  face.end(function(err, code, message) {
+    Swal({
+      title: 'Add New Face?',
+      text: 'If you click "No", you will be redirected to Home',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Add New Face',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        Swal(
+          'Add New Face',
+          'Training New Face',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        window.location.href = "index.html";
+      }
+});
 
   })
 
