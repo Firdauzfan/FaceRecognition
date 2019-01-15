@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V1</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util2.css">
+	<link rel="stylesheet" type="text/css" href="css/main2.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="images/img-01.png" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form">
+					<span class="login100-form-title">
+						Admin Login
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" id="email" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" id="pass" name="pass" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+
+					</div>
+
+					<div class="text-center p-t-136">
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+<script>
+const electron = require('electron');
+const {ipcRenderer} = electron;
+var mysql = require('mysql');
+
+const form = document.querySelector('form');
+form.addEventListener('submit',submitForm);
+
+function submitForm(e){
+	e.preventDefault();
+	console.log('coba');
+	const email = document.querySelector('#email').value;
+	const pass = document.querySelector('#pass').value;
+
+	console.log(email);
+	console.log(pass);
+
+	// Add the credentials to access your database
+	var connection = mysql.createConnection({
+	    host     : 'localhost',
+	    user     : 'root',
+	    password : 'root',
+	    database : 'absensi'
+	});
+
+	// connect to mysql
+	connection.connect(function(err) {
+	    // in case of error
+	    if(err){
+	        console.log(err.code);
+	        console.log(err.fatal);
+	    }
+	});
+
+	$query = 'SELECT * FROM `admin`';
+
+	connection.query($query, function(err, rows, fields) {
+	    if(err){
+	        console.log("An error ocurred performing the query.");
+	        console.log(err);
+	        return;
+	    }
+
+	    console.log("Query succesfully executed", rows);
+			rows.forEach(function(row){
+							if (email==row.nama_login && pass==row.password) {
+								window.location.href = "index.html";
+							}else{
+								alert("Email atau Password Salah");
+								window.location.href = "login.html";
+							}
+
+							 });
+	});
+
+	// Close the connection
+	connection.end(function(){
+	    // The connection has been closed
+	});
+}
+
+
+
+</script>
+
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+<!--===============================================================================================-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+<script>if (window.module) module = window.module;</script>
+<!--===============================================================================================-->
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main2.js"></script>
+
+</body>
+</html>
