@@ -13,6 +13,6 @@ function detect_faces() {
     pythonOptions: ['-u'], // get print results in real-time
   };
   console.log(options);
-  var face = new PythonShell("main_facerec_multiprocess2.py", options);
+  var face = new PythonShell("main_facerec_multiprocess.py", options);
 
 }

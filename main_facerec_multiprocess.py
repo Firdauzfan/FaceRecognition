@@ -131,7 +131,7 @@ if __name__ == '__main__':
         t.daemon = True
         t.start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.21:554/PSIA/streaming/channels/101',
+    video_capture = WebcamVideoStream(src=1,
                                       width=args.width,
                                       height=args.height).start()
     fps = FPS().start()
@@ -160,8 +160,8 @@ if __name__ == '__main__':
 
             except Exception as e:
                 pass
-
-        cv2.imshow('Video', frame)
+        cv2.namedWindow('Face Recognition', cv2.WINDOW_NORMAL)
+        cv2.imshow('Face Recognition', frame)
         fps.update()
 
         #print('[INFO] elapsed time: {:.2f}'.format(time.time() - t))
