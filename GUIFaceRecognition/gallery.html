@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+        <title>Gallery Absence Image</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style2.css">
+        <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/simpleLightbox.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <!-- main css -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <script src="linkjs/facerec.js"></script>
+    </head>
+    <body id="detect" onload="detect_faces()">
+        <!--================Home Gallery Area =================-->
+        <section class="home_gallery_area p_120" style="padding-bottom:30%">
+        	<div class="container" style="margin-top:20%">
+        		<div class="isotope_fillter">
+        			<ul class="galleryfilter list">
+						<li ><a href="facerec.html">Back</a></li>
+					</ul>
+        		</div>
+        	</div>
+        	<div class="container box_1620">
+        		<div class="gallery_f_inner row imageGallery1" id="gallery_hasil">
+
+        		</div>
+
+        	</div>
+        </section>
+
+        <script>
+        var mysql = require('mysql');
+
+        // Add the credentials to access your database
+        var connection = mysql.createConnection({
+            host     : 'localhost',
+      	    user     : 'root',
+      	    password : 'root',
+      	    database : 'absensi'
+        });
+
+        // connect to mysql
+        connection.connect(function(err) {
+            // in case of error
+            if(err){
+                console.log(err.code);
+                console.log(err.fatal);
+            }
+        });
+
+        // Perform a query
+        $query = 'SELECT * FROM `face_absensi` WHERE DATE(waktu_masuk)=DATE(NOW()) ORDER BY waktu_masuk DESC LIMIT 20';
+
+        connection.query($query, function(err, rows, fields) {
+            if(err){
+                console.log("An error ocurred performing the query.");
+                console.log(err);
+                return;
+            }
+
+            console.log("Query succesfully executed", rows);
+            var html='';
+            rows.forEach(function(row){
+            var date=row.waktu_masuk;
+            var months = date.getMonth()+ 1;
+            var dates = date.getDate();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            months = months < 10 ? '0'+months : months;
+            dates = dates < 10 ? '0'+dates : dates;
+            hours = hours < 10 ? '0'+hours : hours;
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            seconds = seconds < 10 ? '0'+seconds : seconds;
+            var datetime = date.getFullYear() + "-" + months + "-" + dates + " " +  hours + ":" + minutes + ":" + seconds;
+            var nama_pegawai=row.nama_pegawai
+
+            html += '<div class="col-lg-3 col-md-4 col-sm-6 ap">';
+            html += '<div class="h_gallery_item">';
+            html += '<img src="../hasil_absensi/';
+            html += nama_pegawai+datetime;
+            html += '.jpg" alt="">';
+            html += '<div class="hover">';
+            html += '<h4>';
+            html += nama_pegawai;
+            html += '</h4>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // console.log(datetime);
+          });
+          document.querySelector('#gallery_hasil').innerHTML = html;
+          console.log(html);
+        });
+
+        // Close the connection
+        connection.end(function(){
+            // The connection has been closed
+        });
+
+        </script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script>if (window.module) module = window.module;</script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/stellar.js"></script>
+        <script src="js/simpleLightbox.min.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <script src="js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/isotope-min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.ajaxchimp.min.js"></script>
+        <script src="js/mail-script.js"></script>
+        <script src="js/theme.js"></script>
+    </body>
+</html>

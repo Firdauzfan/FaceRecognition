@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.min.js"></script>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -117,8 +118,14 @@ function submitForm(e){
 							if (email==row.nama_login && pass==row.password) {
 								window.location.href = "index.html";
 							}else{
-								alert("Email atau Password Salah");
-								window.location.href = "login.html";
+								Swal({
+						      title: 'Email atau Password Salah',
+						      text: 'Your Email or Password Input was Wrong',
+						      type: 'error',
+						    }).then((result) => {
+						      window.location.href = "login.html";
+						});
+
 							}
 
 							 });

@@ -1,5 +1,4 @@
 function detect_faces() {
-
   document.getElementById("detect").value = "Hang on..."
   const {PythonShell} = require('python-shell');
   var path = require("path");
@@ -14,5 +13,6 @@ function detect_faces() {
   };
   console.log(options);
   var face = new PythonShell("main_facerec_multiprocess.py", options);
+
 
 }
