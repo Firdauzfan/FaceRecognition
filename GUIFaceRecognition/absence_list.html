@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List Absence Employee</title>
+  </head>
+    <link rel="stylesheet" type="text/css" href="css/list_absence.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  <body>
+    <section>
+  <!--for demo wrap-->
+  <h1>List Absence Employee</h1>
+  <br>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names, departments, etc.." title="Type in a name">
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0" >
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Pegawai</th>
+          <th>NIP</th>
+          <th>Waktu Masuk</th>
+          <th>Waktu Keluar</th>
+          <th>Telat</th>
+          <th>Status</th>
+          <th>Departemen</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0" id="table_absence">
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+  <button class="contact100-form-btn">
+    <span>
+      <a href="index.html">Back
+      <i class="fa fa-long-arrow-left m-l-7" aria-hidden="true"></i>
+    </span>
+  </button>
+</section>
+
+  </body>
+  <script>
+
+            var mysql = require('mysql');
+
+            // Add the credentials to access your database
+            var connection = mysql.createConnection({
+                host     : 'localhost',
+          	    user     : 'root',
+          	    password : 'root',
+          	    database : 'absensi'
+            });
+
+            // connect to mysql
+            connection.connect(function(err) {
+                // in case of error
+                if(err){
+                    console.log(err.code);
+                    console.log(err.fatal);
+                }
+            });
+
+            // Perform a query
+            $query = 'SELECT *, employee.divisi FROM `face_absensi` JOIN employee ON face_absensi.nama_pegawai=employee.nama_pegawai WHERE DATE(face_absensi.waktu_masuk)=DATE(NOW())';
+
+            connection.query($query, function(err, rows, fields) {
+                if(err){
+                    console.log("An error ocurred performing the query.");
+                    console.log(err);
+                    return;
+                }
+
+                console.log("Query succesfully executed", rows);
+                var html='';
+                i=0;
+                rows.forEach(function(row){
+                var date=row.waktu_masuk;
+                var months = date.getMonth()+ 1;
+                var dates = date.getDate();
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var seconds = date.getSeconds();
+                months = months < 10 ? '0'+months : months;
+                dates = dates < 10 ? '0'+dates : dates;
+                hours = hours < 10 ? '0'+hours : hours;
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+                seconds = seconds < 10 ? '0'+seconds : seconds;
+                var datetime_masuk =  dates + "-" + months  + "-" + date.getFullYear() + " " +  hours + ":" + minutes + ":" + seconds;
+
+
+
+                i=i+1
+                html += '<tr>';
+                html += '<td>';
+                html += i;
+                html += '</td>';
+                html += '<td>';
+                html += row.nama_pegawai
+                html += '</td>';
+                html += '<td>';
+                html += row.employee_id
+                html += '</td>';
+                html += '<td>';
+                html += row.waktu_masuk
+                html += '</td>';
+                html += '<td>';
+                html += row.waktu_keluar
+                html += '</td>';
+                html += '<td>';
+                html += row.selisih_waktu
+                html += '</td>';
+                html += '<td>';
+                html += row.note
+                html += '</td>';
+                html += '<td>';
+                html += row.divisi
+                html += '</td>';
+                html += '</tr>';
+
+                // console.log(datetime);
+              });
+              document.querySelector('#table_absence > tbody').innerHTML = html;
+              console.log(html);
+            });
+
+            // Close the connection
+            connection.end(function(){
+                // The connection has been closed
+            });
+
+  </script>
+
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script>if (window.module) module = window.module;</script>
+  <script type="text/javascript">
+    $(window).on("load resize ", function() {
+      var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+      $('.tbl-header').css({'padding-right':scrollWidth});
+    }).resize();
+  </script>
+
+  <script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#table_absence tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+</html>
