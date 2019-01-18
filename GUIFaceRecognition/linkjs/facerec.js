@@ -16,3 +16,8 @@ function detect_faces() {
 
 
 }
+
+function stop_recog() {
+  var exec = require('child_process').exec, child;
+  var testscript = exec('sh stoppy.sh');
+}
