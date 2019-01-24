@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Training Face</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.min.js"></script>
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+
+<body>
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<!-- <div class="loader"></div> -->
+				<span class="contact100-form-title">
+					VIO Intelligence
+          Add Employee
+				</span>
+        <form class="login100-form validate-form">
+        <div class="wrap-input100 validate-input" data-validate="Employee ID is required">
+          <span class="label-input100">Employee ID</span>
+          <input class="input100" type="text" id="empid" placeholder="Enter your Employee ID">
+          <span class="focus-input100"></span>
+        </div>
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<span class="label-input100">Employee Name</span>
+					<input class="input100" type="text" id="empname" placeholder="Enter your name">
+					<span class="focus-input100"></span>
+				</div>
+        <div class="wrap-input100 validate-input" data-validate="Telegram ID is required">
+          <span class="label-input100">Telegram ID</span>
+          <input class="input100" type="text" type="text" id="teleid" placeholder="Enter your Telegram ID">
+          <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Email is required">
+          <span class="label-input100">Email</span>
+          <input class="input100" type="email" id="email" placeholder="Enter your Email">
+          <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="No Hp is required">
+          <span class="label-input100">No HP</span>
+          <input class="input100" type="text" id="nohp" placeholder="Enter your No Hp">
+          <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Divisi is required">
+          <span class="label-input100">Divisi</span>
+          <input class="input100" type="text" id="divisi" placeholder="Enter your Divisi">
+          <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Jabatan is required">
+          <span class="label-input100">Jabatan</span>
+          <input class="input100" type="text" id="jabatan" placeholder="Enter your Jabatan">
+          <span class="focus-input100"></span>
+        </div>
+
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn" type="submit")">
+							<span>
+								Add New Employee
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+          </form>
+          <button class="contact100-form-btn">
+            <span>
+              <a href="index.html">Back
+              <i class="fa fa-long-arrow-left m-l-7" aria-hidden="true"></i>
+            </span>
+          </button>
+				</div>
+
+		</div>
+	</div>
+
+
+  <script>
+  const electron = require('electron');
+  const {ipcRenderer} = electron;
+  var mysql = require('mysql');
+
+  const form = document.querySelector('form');
+  form.addEventListener('submit',submitForm);
+
+  function submitForm(e){
+  	e.preventDefault();
+  	const empid = document.querySelector('#empid').value;
+  	const empname = document.querySelector('#empname').value;
+    const teleid = document.querySelector('#teleid').value;
+  	const email = document.querySelector('#email').value;
+    const nohp = document.querySelector('#nohp').value;
+    const divisi = document.querySelector('#divisi').value;
+  	const jabatan = document.querySelector('#jabatan').value;
+
+    console.log(empid);
+  	console.log(empname);
+    console.log(teleid);
+  	console.log(email);
+    console.log(nohp);
+  	console.log(divisi);
+  	console.log(jabatan);
+
+  	// Add the credentials to access your database
+  	var connection = mysql.createConnection({
+  	    host     : 'localhost',
+  	    user     : 'root',
+  	    password : 'root',
+  	    database : 'absensi'
+  	});
+
+  	// connect to mysql
+  	connection.connect(function(err) {
+  	    // in case of error
+  	    if(err){
+  	        console.log(err.code);
+  	        console.log(err.fatal);
+  	    }
+  	});
+
+  	$query = 'INSERT INTO employee (id_pegawai, id_telegram, nama_pegawai, email, no_hp, divisi, jabatan) VALUES ?';
+    var values = [[empid,teleid,empname,email,nohp,divisi,jabatan]];
+    console.log(values);
+
+  	connection.query($query, [values], function(err, rows, fields) {
+  	    if(err){
+  	        console.log("An error ocurred performing the query.");
+  	        console.log(err);
+            Swal({
+              title: 'Error Occured When Added',
+              text: 'Check your Input When Add New Employee',
+              type: 'error',
+            }).then((result) => {
+              window.location.href = "user.html";
+        });
+  	        return;
+  	    }else{
+          console.log("Query succesfully executed", rows);
+          Swal({
+            title: 'Success Add New Employee',
+            text: 'succesful Add New Employee',
+            type: 'success',
+          }).then((result) => {
+            window.location.href = "index.html";
+      });
+        }
+
+
+
+  	});
+
+  	// Close the connection
+  	connection.end(function(){
+  	    // The connection has been closed
+  	});
+  }
+
+
+
+  </script>
+
+<!--===============================================================================================-->
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>if (window.module) module = window.module;</script>
+
+
+</body>
+</html>

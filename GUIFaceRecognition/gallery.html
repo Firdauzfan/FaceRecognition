@@ -59,7 +59,7 @@
               });
 
               // Perform a query
-              $query = 'SELECT * FROM `face_absensi` WHERE DATE(waktu_masuk)=DATE(NOW()) ORDER BY waktu_masuk DESC LIMIT 20';
+              $query = 'SELECT * FROM `face_absensi` WHERE DATE(waktu_masuk)=DATE(NOW()) ORDER BY waktu_masuk DESC LIMIT 30';
 
               connection.query($query, function(err, rows, fields) {
                 if(err){
