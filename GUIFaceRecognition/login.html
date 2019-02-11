@@ -58,6 +58,12 @@
 						</button>
 					</div>
 
+					<div class="container-login100-form-btn">
+						<a onclick="quitApplication()" class="login100-form-btn">
+							Quit
+						</a>
+					</div>
+
 					<div class="text-center p-t-12">
 
 					</div>
@@ -72,11 +78,16 @@
 
 <script>
 const electron = require('electron');
+const remote = electron.remote;
 const {ipcRenderer} = electron;
 var mysql = require('mysql');
 
 const form = document.querySelector('form');
 form.addEventListener('submit',submitForm);
+
+function quitApplication(){
+    if (process.platform !== 'darwin') { remote.app.exit(); }
+}
 
 function submitForm(e){
 	e.preventDefault();
