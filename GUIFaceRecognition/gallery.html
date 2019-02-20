@@ -59,7 +59,15 @@
               });
 
               // Perform a query
-              $query = 'SELECT * FROM `face_absensi` WHERE DATE(waktu_masuk)=DATE(NOW()) ORDER BY waktu_masuk DESC LIMIT 30';
+              var objDate1 = new Date();
+              var hours1 = objDate1.getHours();
+              if(hours1 >= 06 && hours1 <= 16){
+                  $query = 'SELECT * FROM `face_absensi` WHERE DATE(waktu_masuk)=DATE(NOW()) ORDER BY waktu_masuk DESC LIMIT 30';
+              }
+              else{
+                  $query = 'SELECT * FROM `face_absensi` WHERE DATE(waktu_keluar)=DATE(NOW()) ORDER BY waktu_keluar DESC LIMIT 30';
+              }
+
 
               connection.query($query, function(err, rows, fields) {
                 if(err){
@@ -69,8 +77,17 @@
                 }
               console.log("Query succesfully executed", rows);
               var html='';
+
               rows.forEach(function(row){
-              var date=row.waktu_masuk;
+              var objDate = new Date();
+              var hours = objDate.getHours();
+              if(hours >= 06 && hours <= 16){
+                  var date=row.waktu_masuk;
+              }
+              else{
+                  var date=row.waktu_keluar;
+              }
+              console.log(date)
               var months = date.getMonth()+ 1;
               var dates = date.getDate();
               var hours = date.getHours();
