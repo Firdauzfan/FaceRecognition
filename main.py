@@ -114,7 +114,7 @@ User input his/her name or ID -> Images from Video Capture -> detect the face ->
 
 '''
 def create_manual_data():
-    vs = cv2.VideoCapture(0); #get input from webcam
+    vs = cv2.VideoCapture(1); #get input from webcam
 
     print("Please input new user ID:")
     new_name = input(); #ez python input()

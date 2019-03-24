@@ -154,11 +154,11 @@ if __name__ == '__main__':
         t2.daemon = True
         t2.start()
 
-    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.39:554/PSIA/streaming/channels/801',
+    video_capture = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.25:554/PSIA/streaming/channels/801',
                                       width=args.width,
                                       height=args.height).start()
 
-    video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.21:554/PSIA/streaming/channels/101',
+    video_capture2 = WebcamVideoStream(src='rtsp://admin:gspe12345@192.168.0.25:554/PSIA/streaming/channels/301',
                                       width=args.width,
                                       height=args.height).start()
 

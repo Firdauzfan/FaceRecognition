@@ -48,7 +48,7 @@ def camera_recog():
     print("[INFO] camera sensor warming up...")
     #vs = cv2.VideoCapture(0); #get input from webcam
     vs = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-    vs1 = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/801")
+    vs1 = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.11:554/PSIA/streaming/channels/801")
     #vs1 = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301")
     #vs = cv2.VideoCapture("rtsp://10.8.250.9:554/user=admin&password=56789E&channel=9&stream=0.sdp?")
     #vs = cv2.VideoCapture("rtsp://10.8.250.13:554/user=admin&password=56789E&channel=14&stream=0.sdp?")

@@ -23,7 +23,7 @@ def main_training():
     data_set = json.loads(f.read())
     person_imgs = {"Left" : [], "Right": [], "Center": []}
     person_features = {"Left" : [], "Right": [], "Center": []}
-    print("Arahkan Wajah Ke Kanan, Tengah, Kiri Secara Perlahan-lahan. Tekan 'q' untuk menyimpan user baru")
+    print("Arahkan Wajah Ke Kanan, Tengah, Kiri Secara Perlahan-lahan. Tekan 's' untuk menyimpan user baru")
     while True:
         _, frame = vs.read()
         rects, landmarks = face_detect.detect_face(frame, 80)
