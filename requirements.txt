@@ -195,7 +195,7 @@ telebot==0.0.3
 telegram==0.0.1
 telepot==12.7
 tensorboard==1.7.0
-tensorflow==1.7.0
+tensorflow==1.15.2
 termcolor==1.1.0
 terminado==0.8.1
 testpath==0.4.2
