@@ -116,7 +116,7 @@ numexpr==2.6.4
 oauth==1.0.1
 olefile==0.45.1
 opencv-contrib-python==3.4.4.19
-opencv-python==3.4.3.18
+opencv-python==3.4.7.28
 openpyxl==2.5.14
 paho-mqtt==1.4.0
 pandas==0.23.4
