@@ -170,7 +170,7 @@ qtconsole==4.4.2
 query-string==1.0.2
 RapidConnect==0.0.6
 ratelim==0.1.6
-reportlab==3.4.0
+reportlab==3.5.55
 request==1.0.2
 requests==2.20.1
 requests-unixsocket==0.1.5
