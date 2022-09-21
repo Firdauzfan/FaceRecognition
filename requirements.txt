@@ -81,7 +81,7 @@ jupyter==1.0.0
 jupyter-client==5.2.3
 jupyter-console==6.0.0
 jupyter-core==4.4.0
-jwcrypto==0.5.0
+jwcrypto==1.4
 Keras==2.2.4
 Keras-Applications==1.0.6
 Keras-Preprocessing==1.0.5
