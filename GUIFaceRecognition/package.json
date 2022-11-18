@@ -16,7 +16,7 @@
   "dependencies": {
     "electron-prebuilt": "^1.4.13",
     "electron-reload": "^1.4.0",
-    "electron-webpack": "^2.6.1",
+    "electron-webpack": "^2.8.2",
     "mysql": "^2.16.0",
     "python-shell": "^1.0.7",
     "request-promise": "^4.2.2",
